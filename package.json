@@ -1,0 +1,12 @@
+{
+  "name": "titan-roofing-site",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "vercel dev",
+    "check": "node --check api/leads.js"
+  },
+  "devDependencies": {
+    "vercel": "^35.2.0"
+  }
+}

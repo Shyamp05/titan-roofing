@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Titan Roofing Leads</title>
+<style>
+:root { color-scheme: dark; --bg:#080909; --panel:#111314; --line:#252829; --text:#e8e4dc; --muted:#8e9294; --gold:#c9a84c; --bad:#ff8c7f; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: Arial, sans-serif; }
+header { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 24px; border-bottom: 1px solid var(--line); }
+h1 { margin: 0; font-size: 20px; letter-spacing: 0.04em; text-transform: uppercase; }
+main { padding: 24px; }
+.login, .lead { background: var(--panel); border: 1px solid var(--line); padding: 18px; }
+.login { max-width: 520px; margin: 40px auto; }
+label { display: block; margin-bottom: 10px; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; }
+input { width: 100%; border: 1px solid var(--line); background: #050606; color: var(--text); padding: 14px; font-size: 14px; }
+button { border: 0; background: var(--gold); color: #080909; padding: 13px 16px; font-weight: 700; text-transform: uppercase; cursor: pointer; }
+.login button { width: 100%; margin-top: 14px; }
+.toolbar { display: flex; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.grid { display: grid; gap: 14px; }
+.lead { display: grid; gap: 10px; }
+.lead-top { display: flex; justify-content: space-between; gap: 14px; color: var(--muted); font-size: 12px; }
+.name { font-size: 18px; font-weight: 700; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px; color: var(--muted); font-size: 13px; }
+.tag { border: 1px solid var(--line); padding: 5px 8px; }
+.message { color: #c9c5bc; line-height: 1.5; }
+.error { color: var(--bad); margin-top: 14px; }
+.empty { color: var(--muted); text-align: center; padding: 40px; border: 1px dashed var(--line); }
+a { color: var(--gold); }
+@media (max-width: 720px) { header, .toolbar { align-items: flex-start; flex-direction: column; } main { padding: 14px; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Titan Roofing Leads</h1>
+  <a href="/">Back to site</a>
+</header>
+<main>
+  <section class="login" id="login">
+    <label for="token">Admin Token</label>
+    <input id="token" type="password" autocomplete="current-password" placeholder="Paste ADMIN_TOKEN from Vercel"/>
+    <button id="loginBtn">View Leads</button>
+    <div class="error" id="loginError"></div>
+  </section>
+
+  <section id="dashboard" hidden>
+    <div class="toolbar">
+      <div>
+        <strong id="leadCount">0 leads</strong>
+        <div style="color:var(--muted);font-size:13px;margin-top:4px;">Latest 100 submissions from Supabase</div>
+      </div>
+      <button id="refreshBtn">Refresh</button>
+    </div>
+    <div class="grid" id="leads"></div>
+  </section>
+</main>
+<script>
+const tokenInput = document.getElementById('token');
+const savedToken = localStorage.getItem('titanAdminToken');
+
+document.getElementById('loginBtn').addEventListener('click', saveToken);
+document.getElementById('refreshBtn').addEventListener('click', loadLeads);
+
+if (savedToken) {
+  tokenInput.value = savedToken;
+  loadLeads();
+}
+
+function saveToken() {
+  localStorage.setItem('titanAdminToken', tokenInput.value.trim());
+  loadLeads();
+}
+
+async function loadLeads() {
+  const token = tokenInput.value.trim() || localStorage.getItem('titanAdminToken');
+  const loginError = document.getElementById('loginError');
+  loginError.textContent = '';
+
+  try {
+    const response = await fetch('/api/leads', {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error || 'Could not load leads.');
+    document.getElementById('login').hidden = true;
+    document.getElementById('dashboard').hidden = false;
+    renderLeads(data.leads || []);
+  } catch (error) {
+    document.getElementById('login').hidden = false;
+    document.getElementById('dashboard').hidden = true;
+    loginError.textContent = error.message || 'Could not load leads.';
+  }
+}
+
+function renderLeads(leads) {
+  document.getElementById('leadCount').textContent = `${leads.length} lead${leads.length === 1 ? '' : 's'}`;
+  const wrap = document.getElementById('leads');
+  if (!leads.length) {
+    wrap.innerHTML = '<div class="empty">No leads yet.</div>';
+    return;
+  }
+
+  wrap.innerHTML = leads.map((lead) => `
+    <article class="lead">
+      <div class="lead-top">
+        <span>${formatDate(lead.created_at)}</span>
+        <span>${escapeHtml(lead.status || 'new')}</span>
+      </div>
+      <div class="name">${escapeHtml(lead.first_name)} ${escapeHtml(lead.last_name)}</div>
+      <div class="meta">
+        <a class="tag" href="tel:${escapeHtml(lead.phone)}">${escapeHtml(lead.phone)}</a>
+        <a class="tag" href="mailto:${escapeHtml(lead.email)}">${escapeHtml(lead.email)}</a>
+        <span class="tag">${escapeHtml(lead.service)}</span>
+        <span class="tag">${escapeHtml(lead.property_type)}</span>
+        ${lead.insurance ? '<span class="tag">Insurance help</span>' : ''}
+      </div>
+      <div class="message">${escapeHtml(lead.address)}</div>
+      ${lead.message ? `<div class="message">${escapeHtml(lead.message)}</div>` : ''}
+    </article>
+  `).join('');
+}
+
+function escapeHtml(value) {
+  return String(value || '').replace(/[&<>"']/g, (char) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+  }[char]));
+}
+
+function formatDate(value) {
+  if (!value) return 'Just now';
+  const date = new Date(value);
+  return date.toLocaleString();
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,2542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Titan Roofing — Premium architectural roofing solutions. Licensed, bonded, 50-year warranty. Emergency services 24/7."/>
+<meta name="keywords" content="roofing, roof repair, residential roofing, commercial roofing, emergency roofing, roof installation"/>
+<meta property="og:title" content="Titan Roofing — Premium Roofing Built To Last"/>
+<meta property="og:description" content="5,000+ projects completed. 50-year structural warranty. Emergency response 24/7."/>
+<title>Titan Roofing — Premium Roofing Built To Last</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Hanken+Grotesk:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet"/>
+<style>
+/* ════════════════════════════════════════
+   CSS VARIABLES & RESET
+════════════════════════════════════════ */
+:root {
+  --bg: #080909;
+  --surface: #0f1011;
+  --surface-high: #161819;
+  --surface-highest: #1e2021;
+  --primary: #c9c5bc;
+  --primary-dim: #8e8a83;
+  --accent: #e9e5dc;
+  --gold: #c9a84c;
+  --gold-dim: #a07830;
+  --on-primary: #0f1011;
+  --text: #e4e2df;
+  --text-muted: #8a8d8e;
+  --text-faint: #4a4d4e;
+  --border: rgba(255,255,255,0.07);
+  --border-solid: #1c1e1f;
+  --glass: rgba(255,255,255,0.03);
+  --glass-border: rgba(255,255,255,0.09);
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'Hanken Grotesk', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+  --shadow-card: 0 32px 80px rgba(0,0,0,0.6);
+  --radius: 2px;
+  --section-gap: 140px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--text-faint); border-radius: 2px; }
+a { text-decoration: none; color: inherit; }
+img { display: block; max-width: 100%; }
+
+/* ════════════════════════════════════════
+   PROGRESS BAR
+════════════════════════════════════════ */
+#progress-bar {
+  position: fixed; top: 0; left: 0; height: 2px; z-index: 9999;
+  background: linear-gradient(90deg, var(--gold), var(--primary));
+  width: 0%; transition: width 0.1s linear;
+}
+
+/* ════════════════════════════════════════
+   COOKIE BANNER
+════════════════════════════════════════ */
+#cookie-banner {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 500;
+  background: var(--surface-high);
+  border-top: 1px solid var(--border-solid);
+  padding: 20px 48px;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  transform: translateY(100%);
+  transition: transform 0.5s ease;
+  flex-wrap: wrap;
+}
+#cookie-banner.show { transform: translateY(0); }
+.cookie-text { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); max-width: 600px; line-height: 1.8; }
+.cookie-btns { display: flex; gap: 12px; flex-shrink: 0; }
+.cookie-accept {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase;
+  background: var(--primary); color: var(--on-primary); border: none; padding: 10px 20px; cursor: pointer;
+  transition: background 0.2s;
+}
+.cookie-accept:hover { background: var(--accent); }
+.cookie-decline {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase;
+  background: transparent; color: var(--text-muted); border: 1px solid var(--border-solid); padding: 10px 20px; cursor: pointer;
+  transition: all 0.2s;
+}
+.cookie-decline:hover { color: var(--primary); border-color: var(--primary); }
+
+/* ════════════════════════════════════════
+   NAVBAR
+════════════════════════════════════════ */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 72px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px;
+  background: rgba(8,9,9,0.7);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid transparent;
+  transition: all 0.4s ease;
+}
+.navbar.scrolled {
+  background: rgba(8,9,9,0.96);
+  border-bottom-color: var(--border-solid);
+  box-shadow: 0 8px 48px rgba(0,0,0,0.5);
+}
+.nav-logo {
+  font-family: var(--font-display); font-size: 20px; font-weight: 800;
+  letter-spacing: -0.02em; text-transform: uppercase; color: var(--primary);
+  display: flex; align-items: center; gap: 10px;
+}
+.nav-logo-icon {
+  width: 32px; height: 32px;
+  background: var(--primary);
+  clip-path: polygon(50% 0%, 100% 35%, 100% 100%, 0% 100%, 0% 35%);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.nav-links { display: flex; align-items: center; gap: 36px; }
+.nav-links a {
+  font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.25em;
+  color: var(--text-muted); position: relative; transition: color 0.25s;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
+  background: var(--primary); transition: width 0.3s ease;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--primary); }
+.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+.nav-right { display: flex; align-items: center; gap: 16px; }
+.nav-phone {
+  font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em;
+  color: var(--gold); border: 1px solid rgba(201,168,76,0.3); padding: 10px 16px;
+  transition: all 0.2s; cursor: pointer;
+}
+.nav-phone:hover { background: rgba(201,168,76,0.08); border-color: var(--gold); }
+.nav-cta {
+  font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em;
+  color: var(--on-primary); background: var(--primary); border: none; padding: 12px 24px;
+  cursor: pointer; transition: all 0.25s; position: relative; overflow: hidden;
+}
+.nav-cta::before {
+  content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+  background: rgba(255,255,255,0.12); transition: left 0.35s ease;
+}
+.nav-cta:hover::before { left: 100%; }
+.nav-cta:hover { background: var(--accent); transform: translateY(-1px); }
+.hamburger {
+  display: none; background: none; border: none; cursor: pointer;
+  color: var(--primary); padding: 8px;
+}
+.hamburger .material-symbols-outlined { font-size: 26px; }
+.mobile-menu {
+  display: none; position: fixed; top: 72px; left: 0; right: 0;
+  background: rgba(8,9,9,0.98); backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border-solid);
+  padding: 24px; z-index: 199;
+  flex-direction: column; gap: 0;
+  transform: translateY(-10px); opacity: 0;
+  transition: all 0.3s ease;
+}
+.mobile-menu.open { display: flex; transform: translateY(0); opacity: 1; }
+.mobile-menu a {
+  font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em;
+  color: var(--text-muted); padding: 16px 0; border-bottom: 1px solid var(--border-solid);
+  transition: color 0.2s;
+}
+.mobile-menu a:hover { color: var(--primary); }
+.mobile-cta {
+  margin-top: 20px; background: var(--primary); color: var(--on-primary);
+  text-align: center; padding: 16px; cursor: pointer;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+  border: none; width: 100%;
+}
+
+/* ════════════════════════════════════════
+   ANIMATIONS
+════════════════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; } to { opacity: 1; }
+}
+@keyframes heroZoom {
+  from { transform: scale(1.04); } to { transform: scale(1.1); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; } 50% { opacity: 0.5; }
+}
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to { background-position: 200% 0; }
+}
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.reveal {
+  opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.15s; }
+.reveal-delay-2 { transition-delay: 0.3s; }
+.reveal-delay-3 { transition-delay: 0.45s; }
+.reveal-delay-4 { transition-delay: 0.6s; }
+
+/* ════════════════════════════════════════
+   HERO
+════════════════════════════════════════ */
+.hero {
+  position: relative; min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  overflow: hidden; padding-top: 72px;
+}
+.hero-bg { position: absolute; inset: 0; z-index: 0; }
+.hero-bg img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: contrast(1.15) brightness(0.38) saturate(0.7);
+  transform: scale(1.04);
+  animation: heroZoom 22s ease-in-out infinite alternate;
+  image-rendering: -webkit-optimize-contrast;
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(8,9,9,0.25) 0%,
+    rgba(8,9,9,0.05) 35%,
+    rgba(8,9,9,0.6) 70%,
+    rgba(8,9,9,0.98) 100%
+  );
+}
+.hero-side-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(8,9,9,0.5) 0%, transparent 50%);
+}
+.hero-noise {
+  position: absolute; inset: 0; z-index: 1; opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 0 48px 80px;
+  max-width: 1440px; width: 100%; margin: 0 auto;
+}
+.hero-label {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 28px; display: flex; align-items: center; gap: 16px;
+  opacity: 0; animation: fadeUp 0.8s ease 0.3s forwards;
+}
+.hero-label::before {
+  content: ''; display: inline-block; width: 40px; height: 1px; background: var(--gold);
+}
+.hero-title {
+  font-family: var(--font-display); font-size: clamp(52px, 8.5vw, 124px);
+  font-weight: 800; line-height: 0.88; letter-spacing: -0.04em;
+  text-transform: uppercase; color: var(--primary); max-width: 960px;
+  opacity: 0; animation: fadeUp 0.9s ease 0.5s forwards;
+}
+.hero-title .outline {
+  -webkit-text-stroke: 1px rgba(201,197,188,0.4); color: transparent;
+}
+.hero-bottom {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 40px; margin-top: 52px; flex-wrap: wrap;
+  opacity: 0; animation: fadeUp 0.9s ease 0.7s forwards;
+}
+.hero-desc {
+  font-size: 17px; line-height: 1.75; color: var(--text-muted); max-width: 460px; font-weight: 300;
+}
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+.hero-trust {
+  margin-top: 24px;
+  display: flex; align-items: center; gap: 20px;
+  font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-faint);
+  opacity: 0; animation: fadeUp 0.9s ease 0.9s forwards;
+}
+.hero-trust-divider { width: 1px; height: 20px; background: var(--border-solid); }
+.btn-primary {
+  font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em;
+  background: var(--primary); color: var(--on-primary); border: none; padding: 18px 36px;
+  cursor: pointer; transition: all 0.25s ease; position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: 10px;
+}
+.btn-primary::before {
+  content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+  background: rgba(255,255,255,0.15); transition: left 0.4s ease;
+}
+.btn-primary:hover::before { left: 100%; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(201,197,188,0.2); }
+.btn-outline {
+  font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em;
+  background: transparent; color: var(--primary); border: 1px solid rgba(201,197,188,0.3); padding: 18px 36px;
+  cursor: pointer; transition: all 0.25s ease; display: inline-flex; align-items: center; gap: 10px;
+}
+.btn-outline:hover { background: rgba(201,197,188,0.07); border-color: var(--primary); transform: translateY(-2px); }
+.btn-gold {
+  font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em;
+  background: var(--gold); color: var(--bg); border: none; padding: 18px 36px;
+  cursor: pointer; transition: all 0.25s ease; display: inline-flex; align-items: center; gap: 10px;
+}
+.btn-gold:hover { background: #d4a84e; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(201,168,76,0.25); }
+
+/* ════════════════════════════════════════
+   TICKER
+════════════════════════════════════════ */
+.ticker-wrap {
+  border-top: 1px solid var(--border-solid); border-bottom: 1px solid var(--border-solid);
+  overflow: hidden; background: var(--surface); padding: 14px 0;
+}
+.ticker-track {
+  display: flex; gap: 0; white-space: nowrap;
+  animation: ticker 30s linear infinite;
+}
+.ticker-item {
+  font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--text-faint); padding: 0 40px; display: flex; align-items: center; gap: 20px;
+  flex-shrink: 0;
+}
+.ticker-dot { width: 4px; height: 4px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+
+/* ════════════════════════════════════════
+   STATS
+════════════════════════════════════════ */
+.stats {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--border-solid); max-width: 1440px; margin: 0 auto;
+}
+.stat-item {
+  padding: 52px 40px; border-right: 1px solid var(--border-solid);
+  position: relative; overflow: hidden;
+  background: linear-gradient(135deg, var(--surface) 0%, var(--bg) 100%);
+  transition: background 0.3s;
+}
+.stat-item:last-child { border-right: none; }
+.stat-item::before {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease;
+}
+.stat-item:hover::before { transform: scaleX(1); }
+.stat-num {
+  font-family: var(--font-display); font-size: 60px; font-weight: 800;
+  line-height: 1; letter-spacing: -0.04em; color: var(--primary); margin-bottom: 12px;
+}
+.stat-label {
+  font-family: var(--font-mono); font-size: 8px; text-transform: uppercase; letter-spacing: 0.25em;
+  color: var(--text-faint);
+}
+.stat-suffix { color: var(--gold); }
+
+/* ════════════════════════════════════════
+   SECTION COMMON
+════════════════════════════════════════ */
+.section { padding: var(--section-gap) 48px; max-width: 1440px; margin: 0 auto; }
+.section-header { margin-bottom: 80px; }
+.section-label {
+  font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.4em;
+  color: var(--gold); display: flex; align-items: center; gap: 14px; margin-bottom: 24px;
+}
+.section-label::before { content: ''; display: inline-block; width: 28px; height: 1px; background: var(--gold); }
+.section-title {
+  font-family: var(--font-display); font-size: clamp(36px, 4.5vw, 64px);
+  font-weight: 800; line-height: 1.0; letter-spacing: -0.04em;
+  text-transform: uppercase; color: var(--primary);
+}
+.section-title .dim { color: var(--primary-dim); }
+.section-subtitle { font-size: 16px; line-height: 1.75; color: var(--text-muted); max-width: 520px; margin-top: 20px; font-weight: 300; }
+
+/* ════════════════════════════════════════
+   SERVICES
+════════════════════════════════════════ */
+#services { border-bottom: 1px solid var(--border-solid); }
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border-solid); }
+.service-card {
+  background: var(--bg); padding: 56px 40px;
+  position: relative; overflow: hidden; cursor: pointer;
+  transition: background 0.4s;
+}
+.service-card:hover { background: var(--surface); }
+.service-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+  transform: scaleX(0); transform-origin: left; transition: transform 0.5s ease;
+}
+.service-card:hover::after { transform: scaleX(1); }
+.service-number {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--text-faint); margin-bottom: 40px;
+}
+.service-icon-wrap {
+  width: 56px; height: 56px; margin-bottom: 28px;
+  background: var(--surface-high); display: flex; align-items: center; justify-content: center;
+  transition: background 0.3s;
+}
+.service-card:hover .service-icon-wrap { background: var(--gold); }
+.service-icon-wrap .material-symbols-outlined { font-size: 26px; color: var(--text-muted); transition: color 0.3s; }
+.service-card:hover .service-icon-wrap .material-symbols-outlined { color: var(--bg); }
+.service-title {
+  font-family: var(--font-display); font-size: 26px; font-weight: 800;
+  letter-spacing: -0.03em; text-transform: uppercase; color: var(--primary); margin-bottom: 16px;
+}
+.service-desc { font-size: 14px; line-height: 1.8; color: var(--text-muted); margin-bottom: 32px; font-weight: 300; }
+.service-link {
+  font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--text-faint); display: flex; align-items: center; gap: 12px; transition: color 0.25s;
+}
+.service-link::after { content: '→'; transition: transform 0.3s; }
+.service-card:hover .service-link { color: var(--gold); }
+.service-card:hover .service-link::after { transform: translateX(4px); }
+
+/* ════════════════════════════════════════
+   WHY TITAN
+════════════════════════════════════════ */
+.why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.why-image-wrap {
+  position: relative; aspect-ratio: 4/5; overflow: hidden;
+}
+.why-image-wrap img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: contrast(1.1) brightness(0.85);
+  transition: transform 0.8s ease;
+}
+.why-image-wrap:hover img { transform: scale(1.04); }
+.why-image-badge {
+  position: absolute; bottom: 32px; left: 32px;
+  background: var(--gold); color: var(--bg); padding: 16px 24px;
+  font-family: var(--font-display); font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: -0.02em;
+}
+.why-points { display: flex; flex-direction: column; gap: 0; }
+.why-point {
+  padding: 28px 0; border-bottom: 1px solid var(--border-solid);
+  display: flex; gap: 24px; align-items: flex-start; transition: padding-left 0.3s;
+}
+.why-point:first-child { border-top: 1px solid var(--border-solid); }
+.why-point:hover { padding-left: 8px; }
+.why-point-icon {
+  width: 40px; height: 40px; background: var(--surface-high); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.3s;
+}
+.why-point:hover .why-point-icon { background: var(--gold); }
+.why-point-icon .material-symbols-outlined { font-size: 18px; color: var(--text-muted); transition: color 0.3s; }
+.why-point:hover .why-point-icon .material-symbols-outlined { color: var(--bg); }
+.why-point-title {
+  font-family: var(--font-display); font-size: 15px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: -0.02em; color: var(--primary); margin-bottom: 6px;
+}
+.why-point-desc { font-size: 13px; line-height: 1.75; color: var(--text-muted); font-weight: 300; }
+
+/* ════════════════════════════════════════
+   GALLERY / PORTFOLIO
+════════════════════════════════════════ */
+#portfolio { border-top: 1px solid var(--border-solid); border-bottom: 1px solid var(--border-solid); }
+.gallery-filter {
+  display: flex; gap: 2px; margin-bottom: 48px; flex-wrap: wrap;
+}
+.filter-btn {
+  font-family: var(--font-mono); font-size: 8px; text-transform: uppercase; letter-spacing: 0.25em;
+  background: transparent; color: var(--text-faint); border: 1px solid var(--border-solid); padding: 10px 20px;
+  cursor: pointer; transition: all 0.25s;
+}
+.filter-btn:hover, .filter-btn.active {
+  background: var(--surface-high); color: var(--primary); border-color: var(--primary-dim);
+}
+.gallery-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+}
+.gallery-item {
+  position: relative; overflow: hidden; cursor: pointer;
+  aspect-ratio: 4/3;
+}
+.gallery-item.tall { aspect-ratio: 3/4; grid-row: span 2; }
+.gallery-item.wide { grid-column: span 2; aspect-ratio: 16/9; }
+.gallery-item img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: brightness(0.75) contrast(1.1);
+  transition: transform 0.6s ease, filter 0.4s ease;
+  image-rendering: -webkit-optimize-contrast;
+}
+.gallery-item:hover img { transform: scale(1.07); filter: brightness(0.55) contrast(1.15); }
+.gallery-overlay {
+  position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 24px; opacity: 0; transition: opacity 0.4s;
+  background: linear-gradient(0deg, rgba(8,9,9,0.85) 0%, transparent 60%);
+}
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-tag {
+  font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 6px;
+}
+.gallery-name {
+  font-family: var(--font-display); font-size: 18px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: -0.02em; color: var(--primary); margin-bottom: 12px;
+}
+.gallery-view-btn {
+  font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--primary); display: flex; align-items: center; gap: 8px;
+}
+.gallery-expand-icon {
+  width: 28px; height: 28px; background: var(--gold); display: flex; align-items: center; justify-content: center;
+}
+.gallery-expand-icon .material-symbols-outlined { font-size: 14px; color: var(--bg); }
+
+/* ════════════════════════════════════════
+   LIGHTBOX
+════════════════════════════════════════ */
+#lightbox {
+  display: none; position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,0.95); align-items: center; justify-content: center;
+  flex-direction: column;
+}
+#lightbox.active { display: flex; animation: fadeIn 0.3s ease; }
+.lightbox-img-wrap { position: relative; max-width: 90vw; max-height: 80vh; }
+.lightbox-img-wrap img { max-width: 90vw; max-height: 78vh; object-fit: contain; }
+.lightbox-close {
+  position: absolute; top: -48px; right: 0;
+  background: none; border: 1px solid var(--border-solid); color: var(--primary);
+  width: 40px; height: 40px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.lightbox-close:hover { background: var(--surface-high); }
+.lightbox-nav {
+  display: flex; gap: 12px; margin-top: 24px;
+}
+.lightbox-btn {
+  background: var(--surface-high); border: 1px solid var(--border-solid); color: var(--primary);
+  width: 48px; height: 48px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s; font-size: 18px;
+}
+.lightbox-btn:hover { background: var(--surface-highest); }
+.lightbox-caption {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--text-muted); margin-top: 16px; text-align: center;
+}
+
+/* ════════════════════════════════════════
+   PRICING
+════════════════════════════════════════ */
+#pricing { border-bottom: 1px solid var(--border-solid); }
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border-solid); }
+.pricing-card {
+  background: var(--bg); padding: 56px 40px; position: relative;
+  transition: background 0.3s;
+}
+.pricing-card.featured { background: var(--surface); }
+.pricing-featured-tag {
+  position: absolute; top: 0; right: 32px;
+  background: var(--gold); color: var(--bg);
+  font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase;
+  padding: 6px 14px;
+}
+.pricing-tier {
+  font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.4em; text-transform: uppercase;
+  color: var(--text-faint); margin-bottom: 24px;
+}
+.pricing-name {
+  font-family: var(--font-display); font-size: 32px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: -0.03em; color: var(--primary); margin-bottom: 32px;
+}
+.pricing-price {
+  margin-bottom: 40px; display: flex; align-items: flex-end; gap: 8px;
+}
+.pricing-amount {
+  font-family: var(--font-display); font-size: 52px; font-weight: 800; color: var(--primary); line-height: 1;
+}
+.pricing-unit { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.2em; color: var(--text-faint); padding-bottom: 8px; }
+.pricing-features { list-style: none; margin-bottom: 48px; }
+.pricing-features li {
+  font-size: 13px; color: var(--text-muted); padding: 10px 0;
+  border-bottom: 1px solid var(--border-solid); display: flex; align-items: center; gap: 12px; font-weight: 300;
+}
+.pricing-features li .material-symbols-outlined { font-size: 14px; color: var(--gold); flex-shrink: 0; }
+.pricing-features li.missing { color: var(--text-faint); }
+.pricing-features li.missing .material-symbols-outlined { color: var(--text-faint); }
+.pricing-cta { width: 100%; }
+
+/* ════════════════════════════════════════
+   PROCESS
+════════════════════════════════════════ */
+#process { border-bottom: 1px solid var(--border-solid); }
+.process-steps { display: flex; flex-direction: column; gap: 0; }
+.process-step {
+  display: grid; grid-template-columns: 80px 1fr auto;
+  align-items: center; gap: 40px;
+  padding: 40px 0; border-bottom: 1px solid var(--border-solid);
+  transition: padding-left 0.3s;
+}
+.process-step:hover { padding-left: 16px; }
+.process-num {
+  font-family: var(--font-display); font-size: 48px; font-weight: 800;
+  letter-spacing: -0.06em; color: var(--text-faint); transition: color 0.3s;
+}
+.process-step:hover .process-num { color: var(--gold); }
+.process-content {}
+.process-step-title {
+  font-family: var(--font-display); font-size: 22px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: -0.02em; color: var(--primary); margin-bottom: 10px;
+}
+.process-step-desc { font-size: 13px; line-height: 1.8; color: var(--text-muted); max-width: 600px; font-weight: 300; }
+.process-arrow {
+  font-size: 24px; color: var(--text-faint); font-family: var(--font-mono); transition: all 0.3s; flex-shrink: 0;
+}
+.process-step:hover .process-arrow { color: var(--gold); transform: translateX(8px); }
+
+/* ════════════════════════════════════════
+   TESTIMONIALS
+════════════════════════════════════════ */
+#testimonials { border-bottom: 1px solid var(--border-solid); }
+.testimonials-slider { position: relative; overflow: hidden; }
+.testimonials-track { display: flex; transition: transform 0.6s cubic-bezier(0.4,0,0.2,1); }
+.testimonial-slide { flex: 0 0 100%; padding: 0 0; }
+.testimonial-card {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+}
+.testimonial-image { position: relative; }
+.testimonial-image img {
+  width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: top;
+  filter: brightness(0.8) contrast(1.05) grayscale(0.3);
+}
+.testimonial-quote-mark {
+  font-family: var(--font-display); font-size: 180px; line-height: 1; color: var(--text-faint); opacity: 0.15;
+  position: absolute; top: -20px; left: -20px;
+}
+.testimonial-stars { display: flex; gap: 4px; margin-bottom: 24px; }
+.testimonial-stars .material-symbols-outlined { font-size: 16px; color: var(--gold); font-variation-settings: 'FILL' 1; }
+.testimonial-text {
+  font-family: var(--font-display); font-size: clamp(20px, 2.5vw, 30px); font-weight: 700;
+  color: var(--primary); line-height: 1.3; letter-spacing: -0.02em; margin-bottom: 36px;
+}
+.testimonial-author-name {
+  font-family: var(--font-display); font-size: 16px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: -0.02em; color: var(--primary); margin-bottom: 4px;
+}
+.testimonial-author-role {
+  font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--text-faint);
+}
+.testimonial-project {
+  margin-top: 24px; padding: 16px 20px;
+  background: var(--surface-high); border-left: 2px solid var(--gold);
+}
+.testimonial-project-label {
+  font-family: var(--font-mono); font-size: 7px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--text-faint); margin-bottom: 4px;
+}
+.testimonial-project-value { font-size: 13px; color: var(--text-muted); font-weight: 300; }
+.testimonials-controls { display: flex; align-items: center; gap: 16px; margin-top: 48px; }
+.slider-btn {
+  width: 48px; height: 48px; border: 1px solid var(--border-solid);
+  background: transparent; color: var(--primary); cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: all 0.25s;
+}
+.slider-btn:hover { background: var(--surface-high); border-color: var(--primary-dim); }
+.slider-dots { display: flex; gap: 8px; }
+.slider-dot {
+  width: 24px; height: 2px; background: var(--border-solid); cursor: pointer; transition: all 0.3s;
+}
+.slider-dot.active { background: var(--primary); width: 40px; }
+.testimonial-count {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.2em; color: var(--text-faint); margin-left: auto;
+}
+
+/* ════════════════════════════════════════
+   FAQ ACCORDION
+════════════════════════════════════════ */
+#faq { border-bottom: 1px solid var(--border-solid); }
+.faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+.faq-list { display: flex; flex-direction: column; gap: 0; }
+.faq-item { border-bottom: 1px solid var(--border-solid); }
+.faq-question {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 24px 0; cursor: pointer; gap: 24px;
+}
+.faq-question-text {
+  font-family: var(--font-display); font-size: 15px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: -0.02em; color: var(--primary); transition: color 0.25s;
+}
+.faq-question:hover .faq-question-text { color: var(--gold); }
+.faq-icon {
+  width: 28px; height: 28px; border: 1px solid var(--border-solid); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s; background: transparent;
+}
+.faq-item.open .faq-icon { background: var(--gold); border-color: var(--gold); transform: rotate(45deg); }
+.faq-icon .material-symbols-outlined { font-size: 14px; color: var(--text-muted); transition: color 0.3s; }
+.faq-item.open .faq-icon .material-symbols-outlined { color: var(--bg); }
+.faq-answer {
+  max-height: 0; overflow: hidden; transition: max-height 0.5s ease, padding 0.3s;
+}
+.faq-item.open .faq-answer { max-height: 300px; }
+.faq-answer-inner {
+  font-size: 13px; line-height: 1.85; color: var(--text-muted); padding-bottom: 24px; font-weight: 300;
+}
+.faq-cta-box {
+  background: var(--surface); border: 1px solid var(--border-solid); padding: 48px 40px;
+  position: sticky; top: 96px;
+}
+.faq-cta-title {
+  font-family: var(--font-display); font-size: 28px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: -0.03em; color: var(--primary); margin-bottom: 16px;
+}
+.faq-cta-desc { font-size: 13px; line-height: 1.8; color: var(--text-muted); margin-bottom: 32px; font-weight: 300; }
+
+/* ════════════════════════════════════════
+   EMERGENCY
+════════════════════════════════════════ */
+.emergency {
+  position: relative; overflow: hidden;
+  background: linear-gradient(135deg, #0c0d0e 0%, #1a0a02 50%, #0c0d0e 100%);
+  border-bottom: 1px solid var(--border-solid);
+}
+.emergency-grid-bg {
+  position: absolute; inset: 0; opacity: 0.04;
+  background-image: linear-gradient(var(--border-solid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-solid) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.emergency-inner {
+  max-width: 1440px; margin: 0 auto; padding: 120px 48px;
+  display: grid; grid-template-columns: 1fr auto; gap: 80px; align-items: center;
+}
+.emergency-label {
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase;
+  color: #ff4433; display: flex; align-items: center; gap: 12px; margin-bottom: 24px;
+}
+.emergency-pulse { width: 6px; height: 6px; background: #ff4433; border-radius: 50%; animation: pulse 1s ease-in-out infinite; }
+.emergency-title {
+  font-family: var(--font-display); font-size: clamp(40px, 6vw, 88px); font-weight: 800;
+  line-height: 0.9; letter-spacing: -0.04em; text-transform: uppercase;
+  color: var(--primary); margin-bottom: 24px;
+}
+.emergency-desc { font-size: 16px; line-height: 1.7; color: var(--text-muted); max-width: 460px; font-weight: 300; }
+.emergency-cta { display: flex; flex-direction: column; gap: 16px; min-width: 320px; }
+.emergency-phone {
+  font-family: var(--font-display); font-size: 28px; font-weight: 800;
+  letter-spacing: -0.04em; color: var(--primary); text-align: center;
+  border: 1px solid var(--border-solid); padding: 20px;
+  background: rgba(255,68,51,0.05); border-color: rgba(255,68,51,0.2);
+}
+.btn-emergency {
+  font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em;
+  background: #ff4433; color: #fff; border: none; padding: 20px 32px; cursor: pointer;
+  transition: all 0.25s; display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%;
+}
+.btn-emergency:hover { background: #ff5544; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(255,68,51,0.3); }
+.btn-emergency .material-symbols-outlined { font-size: 18px; }
+
+/* ════════════════════════════════════════
+   CONTACT FORM
+════════════════════════════════════════ */
+#contact { border-bottom: 1px solid var(--border-solid); }
+.form-inner {
+  max-width: 1440px; margin: 0 auto; padding: var(--section-gap) 48px;
+  display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: start;
+}
+.form-title {
+  font-family: var(--font-display); font-size: clamp(36px, 4vw, 60px); font-weight: 800;
+  line-height: 0.95; letter-spacing: -0.04em; text-transform: uppercase;
+  color: var(--primary); margin-bottom: 24px;
+}
+.form-desc { font-size: 15px; line-height: 1.75; color: var(--text-muted); margin-bottom: 48px; font-weight: 300; }
+.form-features { display: flex; flex-direction: column; gap: 0; }
+.form-feature {
+  display: flex; align-items: center; gap: 16px;
+  padding: 16px 0; border-bottom: 1px solid var(--border-solid); transition: padding-left 0.3s;
+}
+.form-feature:hover { padding-left: 8px; }
+.form-feature-icon { font-size: 16px; color: var(--gold); flex-shrink: 0; }
+.form-feature-text { font-size: 13px; color: var(--text-muted); font-weight: 300; }
+.form-right { background: var(--surface); border: 1px solid var(--border-solid); padding: 48px; }
+.form-step { display: none; }
+.form-step.active { display: block; }
+.form-step-indicator {
+  display: flex; gap: 4px; margin-bottom: 40px;
+}
+.form-step-dot {
+  height: 3px; flex: 1; background: var(--border-solid); transition: background 0.3s;
+}
+.form-step-dot.active { background: var(--gold); }
+.form-step-dot.done { background: var(--primary); }
+.form-group { margin-bottom: 24px; }
+.form-label {
+  font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--text-faint); display: block; margin-bottom: 10px;
+}
+.form-input, .form-select, .form-textarea {
+  width: 100%; background: var(--bg); border: 1px solid var(--border-solid);
+  color: var(--text); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.05em;
+  padding: 16px 18px; transition: border-color 0.25s, background 0.25s;
+  appearance: none; -webkit-appearance: none;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  outline: none; border-color: var(--primary-dim); background: var(--surface-high);
+}
+.form-input::placeholder { color: var(--text-faint); }
+.form-textarea { resize: vertical; min-height: 100px; }
+.form-select option { background: var(--surface); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-error { font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.1em; color: #ff4433; margin-top: 6px; display: none; }
+.form-input.error, .form-select.error { border-color: #ff4433; }
+.form-status {
+  display: none; margin-top: 18px; padding: 14px 16px; border: 1px solid var(--border-solid);
+  background: var(--bg); color: var(--text-muted); font-size: 12px; line-height: 1.6;
+}
+.form-status.error { display: block; border-color: rgba(255,68,51,0.45); color: #ff9a8f; }
+.form-status.info { display: block; border-color: rgba(201,168,76,0.5); color: var(--primary); }
+.form-success {
+  display: none; text-align: center; padding: 48px 24px;
+}
+.form-success-icon { font-size: 56px; color: var(--gold); margin-bottom: 24px; }
+.form-success-title {
+  font-family: var(--font-display); font-size: 28px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: -0.03em; color: var(--primary); margin-bottom: 12px;
+}
+.form-success-desc { font-size: 13px; color: var(--text-muted); line-height: 1.7; font-weight: 300; }
+.form-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 32px; }
+.form-step-label { font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-faint); }
+
+/* ════════════════════════════════════════
+   LIVE CHAT WIDGET
+════════════════════════════════════════ */
+#chat-widget {
+  position: fixed; bottom: 32px; right: 32px; z-index: 400;
+}
+.chat-toggle {
+  width: 56px; height: 56px; background: var(--gold); border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s; box-shadow: 0 8px 24px rgba(201,168,76,0.35);
+}
+.chat-toggle:hover { transform: scale(1.08); }
+.chat-toggle .material-symbols-outlined { font-size: 24px; color: var(--bg); }
+.chat-badge {
+  position: absolute; top: -4px; right: -4px;
+  width: 18px; height: 18px; background: #ff4433; border-radius: 50%;
+  font-family: var(--font-mono); font-size: 8px; color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  animation: pulse 2s ease-in-out infinite;
+}
+.chat-panel {
+  display: none; position: absolute; bottom: 72px; right: 0;
+  width: 320px; background: var(--surface);
+  border: 1px solid var(--border-solid); box-shadow: var(--shadow-card);
+}
+.chat-panel.open { display: flex; flex-direction: column; animation: fadeUp 0.3s ease; }
+.chat-header {
+  padding: 20px 20px 16px; border-bottom: 1px solid var(--border-solid);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.chat-header-info { display: flex; align-items: center; gap: 12px; }
+.chat-avatar {
+  width: 36px; height: 36px; background: var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 14px; font-weight: 800; color: var(--bg);
+}
+.chat-name { font-family: var(--font-display); font-size: 13px; font-weight: 800; text-transform: uppercase; color: var(--primary); }
+.chat-status { font-family: var(--font-mono); font-size: 7px; letter-spacing: 0.2em; text-transform: uppercase; color: #4caf50; display: flex; align-items: center; gap: 4px; }
+.chat-status::before { content: ''; width: 5px; height: 5px; background: #4caf50; border-radius: 50%; }
+.chat-close-btn { background: none; border: none; cursor: pointer; color: var(--text-muted); padding: 4px; }
+.chat-messages { flex: 1; padding: 16px; display: flex; flex-direction: column; gap: 12px; max-height: 240px; overflow-y: auto; }
+.chat-msg { display: flex; flex-direction: column; gap: 4px; max-width: 80%; }
+.chat-msg.bot { align-self: flex-start; }
+.chat-msg.user { align-self: flex-end; }
+.chat-bubble {
+  padding: 10px 14px; font-size: 12px; line-height: 1.6; font-weight: 300;
+}
+.chat-msg.bot .chat-bubble { background: var(--surface-high); color: var(--text-muted); }
+.chat-msg.user .chat-bubble { background: var(--gold); color: var(--bg); font-weight: 400; }
+.chat-time { font-family: var(--font-mono); font-size: 7px; letter-spacing: 0.1em; color: var(--text-faint); }
+.chat-msg.user .chat-time { text-align: right; }
+.chat-input-wrap { padding: 12px 16px; border-top: 1px solid var(--border-solid); display: flex; gap: 8px; }
+.chat-input {
+  flex: 1; background: var(--bg); border: 1px solid var(--border-solid);
+  color: var(--text); font-family: var(--font-body); font-size: 12px; padding: 10px 14px;
+  transition: border-color 0.2s;
+}
+.chat-input:focus { outline: none; border-color: var(--primary-dim); }
+.chat-input::placeholder { color: var(--text-faint); }
+.chat-send {
+  background: var(--gold); border: none; color: var(--bg); cursor: pointer;
+  width: 38px; display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.chat-send:hover { background: #d4a84e; }
+.chat-send .material-symbols-outlined { font-size: 18px; }
+.chat-quick { padding: 0 16px 12px; display: flex; flex-wrap: wrap; gap: 6px; }
+.chat-quick-btn {
+  font-family: var(--font-mono); font-size: 7px; letter-spacing: 0.15em; text-transform: uppercase;
+  background: transparent; border: 1px solid var(--border-solid); color: var(--text-faint);
+  padding: 6px 10px; cursor: pointer; transition: all 0.2s;
+}
+.chat-quick-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+/* ════════════════════════════════════════
+   BEFORE / AFTER SLIDER
+════════════════════════════════════════ */
+.before-after-section { border-bottom: 1px solid var(--border-solid); }
+.before-after-inner { max-width: 1440px; margin: 0 auto; padding: var(--section-gap) 48px; }
+.before-after-wrap {
+  position: relative; overflow: hidden; user-select: none;
+  max-width: 900px; margin: 48px auto 0; aspect-ratio: 16/9; cursor: col-resize;
+}
+.ba-before, .ba-after { position: absolute; inset: 0; }
+.ba-before img, .ba-after img { width: 100%; height: 100%; object-fit: cover; }
+.ba-before { clip-path: inset(0 50% 0 0); transition: clip-path 0.0s; }
+.ba-divider {
+  position: absolute; top: 0; bottom: 0; left: 50%; width: 2px;
+  background: white; transform: translateX(-50%); z-index: 2; pointer-events: none;
+}
+.ba-handle {
+  position: absolute; top: 50%; left: 50%; z-index: 3;
+  transform: translate(-50%, -50%);
+  width: 44px; height: 44px; background: white; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5); cursor: col-resize; pointer-events: none;
+}
+.ba-label {
+  position: absolute; bottom: 16px; font-family: var(--font-mono); font-size: 8px;
+  letter-spacing: 0.25em; text-transform: uppercase; background: rgba(0,0,0,0.7);
+  color: white; padding: 4px 10px; z-index: 4;
+}
+.ba-label-before { left: 16px; }
+.ba-label-after { right: 16px; }
+
+/* ════════════════════════════════════════
+   AWARDS / CERTIFICATIONS
+════════════════════════════════════════ */
+.awards-section { border-bottom: 1px solid var(--border-solid); }
+.awards-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--border-solid); }
+.award-item {
+  background: var(--bg); padding: 40px 32px; text-align: center;
+  transition: background 0.3s; display: flex; flex-direction: column; align-items: center; gap: 16px;
+}
+.award-item:hover { background: var(--surface); }
+.award-icon-wrap {
+  width: 52px; height: 52px; border: 1px solid var(--border-solid);
+  display: flex; align-items: center; justify-content: center; transition: border-color 0.3s;
+}
+.award-item:hover .award-icon-wrap { border-color: var(--gold); }
+.award-icon-wrap .material-symbols-outlined { font-size: 22px; color: var(--text-faint); transition: color 0.3s; }
+.award-item:hover .award-icon-wrap .material-symbols-outlined { color: var(--gold); }
+.award-name {
+  font-family: var(--font-mono); font-size: 7px; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--text-faint); line-height: 1.6;
+}
+
+/* ════════════════════════════════════════
+   FOOTER
+════════════════════════════════════════ */
+footer {
+  background: var(--surface); border-top: 1px solid var(--border-solid);
+}
+.footer-inner { max-width: 1440px; margin: 0 auto; padding: 80px 48px 40px; }
+.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 64px; border-bottom: 1px solid var(--border-solid); }
+.footer-brand-name {
+  font-family: var(--font-display); font-size: 40px; font-weight: 800;
+  letter-spacing: -0.06em; text-transform: uppercase; color: var(--primary); margin-bottom: 20px; line-height: 0.9;
+}
+.footer-tagline { font-size: 12px; line-height: 2.0; color: var(--text-faint); font-weight: 300; }
+.footer-col-title {
+  font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.35em; text-transform: uppercase;
+  color: var(--text-faint); margin-bottom: 20px;
+}
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-links a {
+  font-size: 12px; color: var(--text-muted); transition: color 0.25s; font-weight: 300;
+}
+.footer-links a:hover { color: var(--primary); }
+.footer-contact-phone {
+  font-family: var(--font-display); font-size: 16px; font-weight: 800;
+  letter-spacing: -0.03em; color: var(--primary); margin-bottom: 8px;
+}
+.footer-contact-email { font-size: 12px; color: var(--text-muted); margin-bottom: 20px; font-weight: 300; }
+.footer-social { display: flex; gap: 8px; margin-top: 20px; }
+.social-btn {
+  width: 36px; height: 36px; border: 1px solid var(--border-solid); background: transparent;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.05em; color: var(--text-faint);
+  cursor: pointer; transition: all 0.25s;
+}
+.social-btn:hover { border-color: var(--primary-dim); color: var(--primary); background: var(--surface-high); }
+.footer-bottom {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 28px; flex-wrap: wrap; gap: 16px;
+}
+.footer-copy { font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-faint); }
+.footer-badges { display: flex; gap: 16px; align-items: center; }
+.footer-badge {
+  font-family: var(--font-mono); font-size: 7px; letter-spacing: 0.2em; text-transform: uppercase;
+  border: 1px solid var(--border-solid); padding: 5px 10px; color: var(--text-faint);
+}
+
+/* ════════════════════════════════════════
+   BACK TO TOP
+════════════════════════════════════════ */
+#back-top {
+  position: fixed; bottom: 32px; left: 32px; z-index: 400;
+  width: 44px; height: 44px; background: var(--surface-high); border: 1px solid var(--border-solid);
+  color: var(--primary); cursor: pointer; display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: all 0.3s; transform: translateY(10px);
+}
+#back-top.visible { opacity: 1; transform: translateY(0); }
+#back-top:hover { background: var(--surface-highest); }
+#back-top .material-symbols-outlined { font-size: 18px; }
+
+/* ════════════════════════════════════════
+   GLASS CARD UTILITY
+════════════════════════════════════════ */
+.glass-card {
+  background: var(--glass); backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+}
+
+/* ════════════════════════════════════════
+   MATERIAL SYMBOLS SETTINGS
+════════════════════════════════════════ */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+}
+
+/* ════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════ */
+@media (max-width: 1100px) {
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .pricing-grid { grid-template-columns: 1fr; max-width: 480px; }
+  .why-grid { grid-template-columns: 1fr; gap: 48px; }
+  .testimonial-card { grid-template-columns: 1fr; gap: 40px; }
+  .testimonial-image { display: none; }
+  .faq-grid { grid-template-columns: 1fr; }
+  .faq-cta-box { position: static; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .awards-grid { grid-template-columns: repeat(3, 1fr); }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery-item.wide { grid-column: span 1; aspect-ratio: 4/3; }
+  .gallery-item.tall { aspect-ratio: 4/3; grid-row: span 1; }
+}
+@media (max-width: 768px) {
+  :root { --section-gap: 80px; }
+  .navbar { padding: 0 24px; }
+  .nav-links, .nav-right { display: none; }
+  .hamburger { display: flex; }
+  .hero-content { padding: 0 24px 56px; }
+  .section { padding: var(--section-gap) 24px; }
+  .stats { grid-template-columns: 1fr 1fr; }
+  .stat-item { padding: 32px 24px; }
+  .stat-num { font-size: 44px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .process-step { grid-template-columns: 48px 1fr; }
+  .process-arrow { display: none; }
+  .emergency-inner { grid-template-columns: 1fr; }
+  .form-inner { grid-template-columns: 1fr; padding: var(--section-gap) 24px; }
+  .form-right { padding: 32px 24px; }
+  .footer-inner { padding: 48px 24px 24px; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .gallery-grid { grid-template-columns: 1fr; }
+  .awards-grid { grid-template-columns: repeat(2, 1fr); }
+  .before-after-inner { padding: var(--section-gap) 24px; }
+  #chat-widget { bottom: 24px; right: 24px; }
+  #back-top { bottom: 24px; left: 24px; }
+  #cookie-banner { padding: 20px 24px; }
+  .emergency-inner { padding: 80px 24px; }
+  .form-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- PROGRESS BAR -->
+<div id="progress-bar"></div>
+
+<!-- COOKIE BANNER -->
+<div id="cookie-banner">
+  <p class="cookie-text">We use cookies to enhance your experience and analyze site performance. By continuing, you accept our use of cookies.</p>
+  <div class="cookie-btns">
+    <button class="cookie-accept" onclick="acceptCookies()">Accept All</button>
+    <button class="cookie-decline" onclick="declineCookies()">Decline</button>
+  </div>
+</div>
+
+<!-- BACK TO TOP -->
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+  <span class="material-symbols-outlined">keyboard_arrow_up</span>
+</button>
+
+<!-- ════════ NAVBAR ════════ -->
+<nav class="navbar" id="navbar">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon"></div>
+    Titan Roofing
+  </a>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#process">Process</a>
+    <a href="#testimonials">Reviews</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-right">
+    <a href="tel:18008482766" class="nav-phone">
+      <span class="material-symbols-outlined" style="font-size:12px;vertical-align:middle;">call</span>
+      1-800-TITAN-ROOF
+    </a>
+    <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+      Free Estimate
+    </button>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span class="material-symbols-outlined">menu</span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services">Services</a>
+  <a href="#portfolio">Portfolio</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#process">Process</a>
+  <a href="#testimonials">Reviews</a>
+  <a href="#faq">FAQ</a>
+  <a href="#contact">Contact</a>
+  <button class="mobile-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});mobileMenu.classList.remove('open')">
+    Get Free Estimate
+  </button>
+</div>
+
+<!-- ════════ HERO ════════ -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <img
+      src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=90&fit=crop"
+      alt="Premium residential roofing by Titan Roofing"
+      loading="eager"
+      fetchpriority="high"
+    />
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-side-overlay"></div>
+  <div class="hero-noise"></div>
+  <div class="hero-content">
+    <span class="hero-label">Est. 2004 — Architectural Roofing Specialists</span>
+    <h1 class="hero-title">
+      Built To<br/>
+      <span class="outline">Withstand</span><br/>
+      Everything.
+    </h1>
+    <div class="hero-bottom">
+      <div>
+        <p class="hero-desc">Precision-engineered roofing systems for residential estates, commercial complexes, and industrial facilities. 50-year structural warranty on every project.</p>
+        <div class="hero-trust">
+          <span>5,000+ Projects</span>
+          <div class="hero-trust-divider"></div>
+          <span>Licensed & Bonded</span>
+          <div class="hero-trust-divider"></div>
+          <span>50-Year Warranty</span>
+          <div class="hero-trust-divider"></div>
+          <span>24/7 Emergency</span>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+          <span class="material-symbols-outlined" style="font-size:14px;">schedule</span>
+          Free Inspection
+        </button>
+        <button class="btn-outline" onclick="document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})">
+          View Portfolio
+          <span style="font-size:16px;">→</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-track" id="ticker">
+    <span class="ticker-item"><span class="ticker-dot"></span> Licensed & Fully Bonded</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> 50-Year Structural Warranty</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Drone Inspection Included</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> 24/7 Emergency Response</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> 5,000+ Projects Completed</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Zero-Leak Guarantee</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> EPA Certified Installers</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Free Roof Inspection</span>
+    <!-- Duplicate for seamless loop -->
+    <span class="ticker-item"><span class="ticker-dot"></span> Licensed & Fully Bonded</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> 50-Year Structural Warranty</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Drone Inspection Included</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> 24/7 Emergency Response</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> 5,000+ Projects Completed</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Zero-Leak Guarantee</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> EPA Certified Installers</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Free Roof Inspection</span>
+  </div>
+</div>
+
+<!-- ════════ STATS ════════ -->
+<div class="stats" id="stats">
+  <div class="stat-item reveal">
+    <div class="stat-num"><span class="counter" data-target="5000">0</span><span class="stat-suffix">+</span></div>
+    <div class="stat-label">Projects Completed</div>
+  </div>
+  <div class="stat-item reveal reveal-delay-1">
+    <div class="stat-num"><span class="counter" data-target="50">0</span><span class="stat-suffix">-Yr</span></div>
+    <div class="stat-label">Structural Warranty</div>
+  </div>
+  <div class="stat-item reveal reveal-delay-2">
+    <div class="stat-num"><span class="counter" data-target="98">0</span><span class="stat-suffix">%</span></div>
+    <div class="stat-label">Client Satisfaction</div>
+  </div>
+  <div class="stat-item reveal reveal-delay-3">
+    <div class="stat-num"><span class="counter" data-target="24">0</span><span class="stat-suffix">/7</span></div>
+    <div class="stat-label">Emergency Response</div>
+  </div>
+</div>
+
+<!-- ════════ SERVICES ════════ -->
+<section id="services" style="border-bottom: 1px solid var(--border-solid);">
+  <div class="section">
+    <div class="section-header reveal">
+      <span class="section-label">What We Build</span>
+      <h2 class="section-title">Engineering<br/><span class="dim">Excellence</span><br/>At Every Scale.</h2>
+      <p class="section-subtitle">From heritage homes to industrial complexes — we deliver precision-engineered roofing solutions that outlast the structure beneath them.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-number">01 / Residential</div>
+        <div class="service-icon-wrap"><span class="material-symbols-outlined">home</span></div>
+        <div class="service-title">Residential Roofing</div>
+        <p class="service-desc">Bespoke roofing systems engineered for heritage estates, luxury homes, and modern residences. Premium materials with architectural-grade finishing.</p>
+        <a class="service-link" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get Free Quote</a>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-number">02 / Commercial</div>
+        <div class="service-icon-wrap"><span class="material-symbols-outlined">corporate_fare</span></div>
+        <div class="service-title">Commercial Roofing</div>
+        <p class="service-desc">High-performance flat and low-slope systems for commercial buildings. TPO, EPDM, modified bitumen, and metal panel installations.</p>
+        <a class="service-link" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get Free Quote</a>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-number">03 / Industrial</div>
+        <div class="service-icon-wrap"><span class="material-symbols-outlined">factory</span></div>
+        <div class="service-title">Industrial Roofing</div>
+        <p class="service-desc">Structural metal roofing and specialized systems for warehouses, manufacturing plants, and distribution centers. Wind-load engineered.</p>
+        <a class="service-link" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get Free Quote</a>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-number">04 / Emergency</div>
+        <div class="service-icon-wrap"><span class="material-symbols-outlined">emergency</span></div>
+        <div class="service-title">Emergency Repairs</div>
+        <p class="service-desc">24/7 rapid response teams deployed within 2 hours. Temporary weatherproofing to permanent repair — we protect your structure around the clock.</p>
+        <a class="service-link" href="tel:18008482766">Call Now: 1-800-TITAN</a>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-number">05 / Maintenance</div>
+        <div class="service-icon-wrap"><span class="material-symbols-outlined">build</span></div>
+        <div class="service-title">Roof Maintenance</div>
+        <p class="service-desc">Annual inspection programs, preventive maintenance contracts, and detailed condition reporting with drone imaging technology.</p>
+        <a class="service-link" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Schedule Inspection</a>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-number">06 / Specialty</div>
+        <div class="service-icon-wrap"><span class="material-symbols-outlined">eco</span></div>
+        <div class="service-title">Green & Solar Ready</div>
+        <p class="service-desc">Living roofs, cool roof coatings, and solar-panel-ready structural systems. Energy-efficient designs certified by LEED and Energy Star.</p>
+        <a class="service-link" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Learn More</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ WHY TITAN ════════ -->
+<section style="border-bottom: 1px solid var(--border-solid);">
+  <div class="section">
+    <div class="why-grid">
+      <div class="why-image-wrap reveal">
+        <img
+          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=90&fit=crop"
+          alt="Titan Roofing team at work"
+          loading="lazy"
+        />
+        <div class="why-image-badge">20 Years<br/>Excellence</div>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <span class="section-label">Why Choose Titan</span>
+        <h2 class="section-title" style="margin-bottom:16px;">The Standard<br/>Others<br/><span class="dim">Aspire To.</span></h2>
+        <p class="section-subtitle" style="margin-bottom: 48px;">We don't just install roofs. We engineer long-term protection for your most valuable asset.</p>
+        <div class="why-points">
+          <div class="why-point">
+            <div class="why-point-icon"><span class="material-symbols-outlined">flight</span></div>
+            <div>
+              <div class="why-point-title">Drone-Assisted Inspection</div>
+              <p class="why-point-desc">Every project begins with high-resolution drone imaging, providing detailed structural analysis inaccessible to traditional methods.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <div class="why-point-icon"><span class="material-symbols-outlined">workspace_premium</span></div>
+            <div>
+              <div class="why-point-title">50-Year Structural Warranty</div>
+              <p class="why-point-desc">Industry-leading warranty backed by our $50M insurance bond. Every installation certified by our senior engineering team.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <div class="why-point-icon"><span class="material-symbols-outlined">speed</span></div>
+            <div>
+              <div class="why-point-title">2-Hour Emergency Response</div>
+              <p class="why-point-desc">Dedicated rapid-response crews on standby 24/7/365. We arrive before further structural damage can occur.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <div class="why-point-icon"><span class="material-symbols-outlined">verified</span></div>
+            <div>
+              <div class="why-point-title">Licensed, Bonded & Insured</div>
+              <p class="why-point-desc">Fully licensed in all 50 states, with comprehensive liability and workers' compensation coverage on every project.</p>
+            </div>
+          </div>
+          <div class="why-point">
+            <div class="why-point-icon"><span class="material-symbols-outlined">science</span></div>
+            <div>
+              <div class="why-point-title">Material Engineering Lab</div>
+              <p class="why-point-desc">We spec materials based on your local wind uplift, thermal cycle data, and UV exposure — not what's cheapest in stock.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ PORTFOLIO ════════ -->
+<section id="portfolio">
+  <div class="section" style="padding-bottom:40px;">
+    <div class="section-header reveal">
+      <span class="section-label">Our Work</span>
+      <h2 class="section-title">5,000+ Roofs.<br/><span class="dim">Zero Leaks.</span></h2>
+    </div>
+    <div class="gallery-filter reveal reveal-delay-1">
+      <button class="filter-btn active" data-filter="all">All Projects</button>
+      <button class="filter-btn" data-filter="residential">Residential</button>
+      <button class="filter-btn" data-filter="commercial">Commercial</button>
+      <button class="filter-btn" data-filter="industrial">Industrial</button>
+      <button class="filter-btn" data-filter="emergency">Emergency</button>
+    </div>
+  </div>
+  <div style="padding: 0 48px 140px; max-width: 1440px; margin: 0 auto;">
+    <div class="gallery-grid" id="gallery-grid">
+      <div class="gallery-item wide" data-category="commercial" data-img="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=90&fit=crop" data-title="Commerce Tower, Dallas" data-tag="Commercial — 2024">
+        <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200&q=90&fit=crop" alt="Commerce Tower Dallas" loading="lazy"/>
+        <div class="gallery-overlay">
+          <div class="gallery-tag">Commercial — 2024</div>
+          <div class="gallery-name">Commerce Tower, Dallas</div>
+          <div class="gallery-view-btn">View Project <div class="gallery-expand-icon"><span class="material-symbols-outlined">open_in_full</span></div></div>
+        </div>
+      </div>
+      <div class="gallery-item tall" data-category="residential" data-img="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=90&fit=crop" data-title="Lakeside Estate, Austin" data-tag="Residential — 2024">
+        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=90&fit=crop" alt="Lakeside Estate Austin" loading="lazy"/>
+        <div class="gallery-overlay">
+          <div class="gallery-tag">Residential — 2024</div>
+          <div class="gallery-name">Lakeside Estate, Austin</div>
+          <div class="gallery-view-btn">View Project <div class="gallery-expand-icon"><span class="material-symbols-outlined">open_in_full</span></div></div>
+        </div>
+      </div>
+      <div class="gallery-item" data-category="industrial" data-img="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&q=90&fit=crop" data-title="Horizon Distribution Center" data-tag="Industrial — 2023">
+        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&q=90&fit=crop" alt="Industrial Warehouse Roofing" loading="lazy"/>
+        <div class="gallery-overlay">
+          <div class="gallery-tag">Industrial — 2023</div>
+          <div class="gallery-name">Horizon Distribution Center</div>
+          <div class="gallery-view-btn">View Project <div class="gallery-expand-icon"><span class="material-symbols-outlined">open_in_full</span></div></div>
+        </div>
+      </div>
+      <div class="gallery-item" data-category="residential" data-img="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=900&q=90&fit=crop" data-title="Heritage Home, Nashville" data-tag="Residential — 2023">
+        <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=900&q=90&fit=crop" alt="Heritage Home Nashville" loading="lazy"/>
+        <div class="gallery-overlay">
+          <div class="gallery-tag">Residential — 2023</div>
+          <div class="gallery-name">Heritage Home, Nashville</div>
+          <div class="gallery-view-btn">View Project <div class="gallery-expand-icon"><span class="material-symbols-outlined">open_in_full</span></div></div>
+        </div>
+      </div>
+      <div class="gallery-item" data-category="commercial" data-img="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=900&q=90&fit=crop" data-title="Meridian Office Park" data-tag="Commercial — 2023">
+        <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=900&q=90&fit=crop" alt="Meridian Office Park" loading="lazy"/>
+        <div class="gallery-overlay">
+          <div class="gallery-tag">Commercial — 2023</div>
+          <div class="gallery-name">Meridian Office Park</div>
+          <div class="gallery-view-btn">View Project <div class="gallery-expand-icon"><span class="material-symbols-outlined">open_in_full</span></div></div>
+        </div>
+      </div>
+      <div class="gallery-item" data-category="residential" data-img="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&q=90&fit=crop" data-title="Summit View, Denver" data-tag="Residential — 2022">
+        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&q=90&fit=crop" alt="Summit View Denver" loading="lazy"/>
+        <div class="gallery-overlay">
+          <div class="gallery-tag">Residential — 2022</div>
+          <div class="gallery-name">Summit View, Denver</div>
+          <div class="gallery-view-btn">View Project <div class="gallery-expand-icon"><span class="material-symbols-outlined">open_in_full</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Image Lightbox">
+  <div class="lightbox-img-wrap">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">
+      <span class="material-symbols-outlined" style="font-size:16px;">close</span>
+    </button>
+    <img id="lightboxImg" src="" alt=""/>
+  </div>
+  <div class="lightbox-nav">
+    <button class="lightbox-btn" id="lightboxPrev">←</button>
+    <button class="lightbox-btn" id="lightboxNext">→</button>
+  </div>
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
+
+<!-- ════════ BEFORE / AFTER ════════ -->
+<div class="before-after-section">
+  <div class="before-after-inner">
+    <div class="section-header reveal" style="margin-bottom:0;">
+      <span class="section-label">Transformation</span>
+      <h2 class="section-title">Before &<br/><span class="dim">After.</span></h2>
+      <p class="section-subtitle">Drag the slider to see the Titan difference on a recent residential project in Austin, TX.</p>
+    </div>
+    <div class="before-after-wrap reveal reveal-delay-1" id="baWrap">
+      <div class="ba-after">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=90&fit=crop" alt="After roofing installation"/>
+      </div>
+      <div class="ba-before" id="baBefore">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=90&fit=crop" alt="Before roofing installation" style="filter:brightness(0.6) contrast(1.1) saturate(0.5);"/>
+      </div>
+      <div class="ba-divider" id="baDivider"></div>
+      <div class="ba-handle" id="baHandle">
+        <span style="font-size:18px; color:#333;">⟺</span>
+      </div>
+      <div class="ba-label ba-label-before">Before</div>
+      <div class="ba-label ba-label-after">After</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ PRICING ════════ -->
+<section id="pricing">
+  <div class="section">
+    <div class="section-header reveal">
+      <span class="section-label">Investment</span>
+      <h2 class="section-title">Transparent<br/><span class="dim">Pricing.</span></h2>
+      <p class="section-subtitle">Every project is unique, but our tier structure gives you a clear starting point. All quotes include free inspection and material specification.</p>
+    </div>
+    <div class="pricing-grid reveal reveal-delay-1">
+      <div class="pricing-card">
+        <div class="pricing-tier">Tier 01</div>
+        <div class="pricing-name">Essential</div>
+        <div class="pricing-price">
+          <div class="pricing-amount">$8</div>
+          <div class="pricing-unit">/ sq ft<br/>starting at</div>
+        </div>
+        <ul class="pricing-features">
+          <li><span class="material-symbols-outlined">check</span> Asphalt shingle systems</li>
+          <li><span class="material-symbols-outlined">check</span> Standard 15-year warranty</li>
+          <li><span class="material-symbols-outlined">check</span> Basic inspection included</li>
+          <li><span class="material-symbols-outlined">check</span> Licensed installation crew</li>
+          <li class="missing"><span class="material-symbols-outlined">remove</span> Drone inspection</li>
+          <li class="missing"><span class="material-symbols-outlined">remove</span> Material engineering spec</li>
+          <li class="missing"><span class="material-symbols-outlined">remove</span> Priority emergency access</li>
+        </ul>
+        <button class="btn-outline pricing-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get Quote</button>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-featured-tag">Most Popular</div>
+        <div class="pricing-tier">Tier 02</div>
+        <div class="pricing-name">Premium</div>
+        <div class="pricing-price">
+          <div class="pricing-amount">$18</div>
+          <div class="pricing-unit">/ sq ft<br/>starting at</div>
+        </div>
+        <ul class="pricing-features">
+          <li><span class="material-symbols-outlined">check</span> Premium metal or slate systems</li>
+          <li><span class="material-symbols-outlined">check</span> 30-year structural warranty</li>
+          <li><span class="material-symbols-outlined">check</span> Drone inspection included</li>
+          <li><span class="material-symbols-outlined">check</span> Material engineering specification</li>
+          <li><span class="material-symbols-outlined">check</span> Advanced weatherproofing</li>
+          <li><span class="material-symbols-outlined">check</span> Priority emergency access</li>
+          <li class="missing"><span class="material-symbols-outlined">remove</span> 50-year warranty</li>
+        </ul>
+        <button class="btn-gold pricing-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get Quote</button>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-tier">Tier 03</div>
+        <div class="pricing-name">Titan Elite</div>
+        <div class="pricing-price">
+          <div class="pricing-amount">$32</div>
+          <div class="pricing-unit">/ sq ft<br/>starting at</div>
+        </div>
+        <ul class="pricing-features">
+          <li><span class="material-symbols-outlined">check</span> Architectural premium materials</li>
+          <li><span class="material-symbols-outlined">check</span> 50-year structural warranty</li>
+          <li><span class="material-symbols-outlined">check</span> Full engineering report</li>
+          <li><span class="material-symbols-outlined">check</span> Post-install drone certification</li>
+          <li><span class="material-symbols-outlined">check</span> Annual maintenance plan</li>
+          <li><span class="material-symbols-outlined">check</span> Dedicated account manager</li>
+          <li><span class="material-symbols-outlined">check</span> 24/7 priority emergency line</li>
+        </ul>
+        <button class="btn-primary pricing-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get Quote</button>
+      </div>
+    </div>
+    <p class="reveal" style="text-align:center;margin-top:32px;font-family:var(--font-mono);font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-faint);">All prices are indicative. Exact quotes provided after free on-site inspection. Financing available on all tiers.</p>
+  </div>
+</section>
+
+<!-- ════════ PROCESS ════════ -->
+<section id="process">
+  <div class="section">
+    <div class="section-header reveal">
+      <span class="section-label">The Titan Standard</span>
+      <h2 class="section-title">A Blueprint For<br/><span class="dim">Flawless</span><br/>Execution.</h2>
+    </div>
+    <div class="process-steps">
+      <div class="process-step reveal">
+        <div class="process-num">01</div>
+        <div class="process-content">
+          <div class="process-step-title">Structural Assessment</div>
+          <p class="process-step-desc">Comprehensive drone inspection and core sampling to determine underlying structural integrity, thermal imaging for hidden moisture, and full material analysis before specification.</p>
+        </div>
+        <div class="process-arrow">→</div>
+      </div>
+      <div class="process-step reveal reveal-delay-1">
+        <div class="process-num">02</div>
+        <div class="process-content">
+          <div class="process-step-title">Architectural Specification</div>
+          <p class="process-step-desc">Detailed material engineering plan accounting for thermal resistance, local wind uplift ratings, seismic data, UV exposure, and aesthetic cohesion with the property's architecture.</p>
+        </div>
+        <div class="process-arrow">→</div>
+      </div>
+      <div class="process-step reveal reveal-delay-2">
+        <div class="process-num">03</div>
+        <div class="process-content">
+          <div class="process-step-title">Precision Installation</div>
+          <p class="process-step-desc">Execution by specialized crews under strict quality control oversight, utilizing advanced weatherproofing technologies, precision fastening systems, and zero-tolerance leak protocols.</p>
+        </div>
+        <div class="process-arrow">→</div>
+      </div>
+      <div class="process-step reveal reveal-delay-3">
+        <div class="process-num">04</div>
+        <div class="process-content">
+          <div class="process-step-title">Post-Install Drone Certification</div>
+          <p class="process-step-desc">Final drone photographic survey, water-test certification, thermal imaging verification, documentation package, and issuance of our industry-leading structural warranty.</p>
+        </div>
+        <div class="process-arrow">→</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ TESTIMONIALS ════════ -->
+<section id="testimonials">
+  <div class="section">
+    <div class="section-header reveal" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;">
+      <div>
+        <span class="section-label">Client Reviews</span>
+        <h2 class="section-title">What Our<br/><span class="dim">Clients Say.</span></h2>
+      </div>
+      <div class="testimonials-controls">
+        <button class="slider-btn" id="sliderPrev"><span class="material-symbols-outlined" style="font-size:18px;">arrow_back</span></button>
+        <div class="slider-dots" id="sliderDots"></div>
+        <button class="slider-btn" id="sliderNext"><span class="material-symbols-outlined" style="font-size:18px;">arrow_forward</span></button>
+        <div class="testimonial-count" id="testimonialCount">01 / 04</div>
+      </div>
+    </div>
+    <div class="testimonials-slider reveal reveal-delay-1">
+      <div class="testimonials-track" id="testimonialsTrack">
+
+        <div class="testimonial-slide">
+          <div class="testimonial-card">
+            <div class="testimonial-image">
+              <div class="testimonial-quote-mark">"</div>
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=85&fit=crop&crop=face" alt="James Worthington"/>
+            </div>
+            <div>
+              <div class="testimonial-stars">
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+              </div>
+              <p class="testimonial-text">"Titan delivered beyond every expectation. The drone inspection found three issues our previous contractor missed. The quality of finish is extraordinary."</p>
+              <div class="testimonial-author-name">James Worthington</div>
+              <div class="testimonial-author-role">CEO, Worthington Properties — Dallas, TX</div>
+              <div class="testimonial-project">
+                <div class="testimonial-project-label">Project</div>
+                <div class="testimonial-project-value">Commercial Complex — 48,000 sq ft metal roof system, 2024</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-slide">
+          <div class="testimonial-card">
+            <div class="testimonial-image">
+              <div class="testimonial-quote-mark">"</div>
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&q=85&fit=crop&crop=face" alt="Sarah Marchetti"/>
+            </div>
+            <div>
+              <div class="testimonial-stars">
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+              </div>
+              <p class="testimonial-text">"After the storm damage, Titan had crews on-site within 90 minutes. They saved us from catastrophic water intrusion. The permanent repair exceeded our original roof quality."</p>
+              <div class="testimonial-author-name">Sarah Marchetti</div>
+              <div class="testimonial-author-role">Homeowner — Austin, TX</div>
+              <div class="testimonial-project">
+                <div class="testimonial-project-label">Project</div>
+                <div class="testimonial-project-value">Emergency Repair + Full Residential Replacement — 2023</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-slide">
+          <div class="testimonial-card">
+            <div class="testimonial-image">
+              <div class="testimonial-quote-mark">"</div>
+              <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&q=85&fit=crop&crop=face" alt="Robert Chen"/>
+            </div>
+            <div>
+              <div class="testimonial-stars">
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+              </div>
+              <p class="testimonial-text">"We've used Titan on six warehouse facilities across Texas. Consistent quality, transparent pricing, and their project management is the best in the business."</p>
+              <div class="testimonial-author-name">Robert Chen</div>
+              <div class="testimonial-author-role">VP of Facilities, NexCo Logistics</div>
+              <div class="testimonial-project">
+                <div class="testimonial-project-label">Project</div>
+                <div class="testimonial-project-value">Industrial Portfolio — 6 facilities, 280,000+ sq ft, 2022-2024</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-slide">
+          <div class="testimonial-card">
+            <div class="testimonial-image">
+              <div class="testimonial-quote-mark">"</div>
+              <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&q=85&fit=crop&crop=face" alt="Diana Flores"/>
+            </div>
+            <div>
+              <div class="testimonial-stars">
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+                <span class="material-symbols-outlined">star</span>
+              </div>
+              <p class="testimonial-text">"The 50-year warranty was the deciding factor. Four years in, and our green roof system is performing exactly as engineered. The energy savings alone have returned 40% of the investment."</p>
+              <div class="testimonial-author-name">Diana Flores</div>
+              <div class="testimonial-author-role">Director of Operations, Meridian Hotels</div>
+              <div class="testimonial-project">
+                <div class="testimonial-project-label">Project</div>
+                <div class="testimonial-project-value">Green Roof + Solar-Ready System — Hotel Complex, 2021</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ AWARDS ════════ -->
+<div class="awards-section">
+  <div class="section" style="padding-top:64px;padding-bottom:0;">
+    <div class="section-header reveal" style="margin-bottom:48px;">
+      <span class="section-label">Recognition</span>
+      <h2 class="section-title" style="font-size:clamp(28px,3vw,44px);">Certifications &<br/><span class="dim">Industry Awards.</span></h2>
+    </div>
+  </div>
+  <div class="awards-grid reveal reveal-delay-1">
+    <div class="award-item">
+      <div class="award-icon-wrap"><span class="material-symbols-outlined">workspace_premium</span></div>
+      <div class="award-name">NRCA<br/>Master Elite</div>
+    </div>
+    <div class="award-item">
+      <div class="award-icon-wrap"><span class="material-symbols-outlined">eco</span></div>
+      <div class="award-name">LEED<br/>Certified</div>
+    </div>
+    <div class="award-item">
+      <div class="award-icon-wrap"><span class="material-symbols-outlined">verified</span></div>
+      <div class="award-name">GAF Master<br/>Elite Contractor</div>
+    </div>
+    <div class="award-item">
+      <div class="award-icon-wrap"><span class="material-symbols-outlined">military_tech</span></div>
+      <div class="award-name">Owens Corning<br/>Platinum Preferred</div>
+    </div>
+    <div class="award-item">
+      <div class="award-icon-wrap"><span class="material-symbols-outlined">bolt</span></div>
+      <div class="award-name">Energy Star<br/>Partner</div>
+    </div>
+  </div>
+  <div style="padding-bottom:140px;"></div>
+</div>
+
+<!-- ════════ FAQ ════════ -->
+<section id="faq">
+  <div class="section">
+    <div class="section-header reveal">
+      <span class="section-label">Common Questions</span>
+      <h2 class="section-title">Got<br/><span class="dim">Questions?</span></h2>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-list" id="faqList">
+        <div class="faq-item open">
+          <div class="faq-question">
+            <span class="faq-question-text">How long does a typical roof installation take?</span>
+            <div class="faq-icon"><span class="material-symbols-outlined">add</span></div>
+          </div>
+          <div class="faq-answer">
+            <p class="faq-answer-inner">Most residential projects are completed in 1–3 days depending on square footage and material complexity. Commercial projects range from one week to several months. We provide a detailed project timeline during your free inspection, and our project management team provides daily progress updates.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            <span class="faq-question-text">What does your 50-year warranty cover?</span>
+            <div class="faq-icon"><span class="material-symbols-outlined">add</span></div>
+          </div>
+          <div class="faq-answer">
+            <p class="faq-answer-inner">Our Elite tier 50-year structural warranty covers material defects, installation workmanship, and structural failure under normal weather conditions. It includes annual inspection visits and priority repair response at no additional cost. The warranty is transferable to new property owners.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            <span class="faq-question-text">Do you offer financing for roofing projects?</span>
+            <div class="faq-icon"><span class="material-symbols-outlined">add</span></div>
+          </div>
+          <div class="faq-answer">
+            <p class="faq-answer-inner">Yes. We offer flexible financing plans through our banking partners, including 0% APR for 18 months on qualifying projects, and extended payment plans up to 10 years. We also assist with insurance claims documentation at no additional charge.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            <span class="faq-question-text">What roofing materials do you specialize in?</span>
+            <div class="faq-icon"><span class="material-symbols-outlined">add</span></div>
+          </div>
+          <div class="faq-answer">
+            <p class="faq-answer-inner">We work with the full spectrum: architectural asphalt shingles, standing seam and corrugated metal, natural and synthetic slate, clay and concrete tile, TPO and EPDM for flat roofs, modified bitumen, built-up roofing, and living green roof systems. Materials are specified based on your climate data, not preference.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            <span class="faq-question-text">How quickly can you respond to an emergency?</span>
+            <div class="faq-icon"><span class="material-symbols-outlined">add</span></div>
+          </div>
+          <div class="faq-answer">
+            <p class="faq-answer-inner">Our emergency response teams are on standby 24/7/365. We guarantee on-site arrival within 2 hours for all emergency calls in our service area. We begin with immediate weatherproofing to prevent further damage, then schedule permanent repair at your earliest convenience.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            <span class="faq-question-text">Do you handle insurance claims?</span>
+            <div class="faq-icon"><span class="material-symbols-outlined">add</span></div>
+          </div>
+          <div class="faq-answer">
+            <p class="faq-answer-inner">Absolutely. Our dedicated claims team works directly with all major insurers. We document all storm damage with our drone technology, provide detailed damage reports, and can attend the adjuster inspection on your behalf. Most storm damage repairs are covered 100% by homeowners insurance.</p>
+          </div>
+        </div>
+      </div>
+      <div class="faq-cta-box reveal reveal-delay-2">
+        <div class="faq-cta-title">Still Have Questions?</div>
+        <p class="faq-cta-desc">Our senior roofing consultants are available Monday through Saturday, 7am to 7pm, to answer any questions about your specific project — no obligation, no pressure.</p>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+            <span class="material-symbols-outlined" style="font-size:14px;">schedule</span>
+            Schedule Consultation
+          </button>
+          <a href="tel:18008482766" class="btn-outline" style="justify-content:center;display:flex;">
+            <span class="material-symbols-outlined" style="font-size:14px;">call</span>
+            Call 1-800-TITAN-ROOF
+          </a>
+        </div>
+        <div style="margin-top:32px;padding-top:24px;border-top:1px solid var(--border-solid);">
+          <div style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.25em;text-transform:uppercase;color:var(--text-faint);margin-bottom:12px;">Average Response Time</div>
+          <div style="font-family:var(--font-display);font-size:32px;font-weight:800;letter-spacing:-0.04em;color:var(--gold);">< 2 Hours</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ EMERGENCY ════════ -->
+<section class="emergency">
+  <div class="emergency-grid-bg"></div>
+  <div class="emergency-inner">
+    <div class="reveal">
+      <div class="emergency-label">
+        <div class="emergency-pulse"></div>
+        Priority Emergency Status — Available 24/7
+      </div>
+      <h2 class="emergency-title">Roof<br/>Damage?<br/>We're Here.</h2>
+      <p class="emergency-desc">Immediate response teams deployed to secure your property and prevent catastrophic structural loss. Every minute matters — we know that.</p>
+    </div>
+    <div class="emergency-cta reveal reveal-delay-2">
+      <a href="tel:18008482766" class="emergency-phone">1-800-TITAN-ROOF</a>
+      <a href="tel:18008482766" class="btn-emergency">
+        <span class="material-symbols-outlined">call</span>
+        Call Emergency Line Now
+      </a>
+      <button class="btn-outline" style="width:100%;justify-content:center;" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Request Emergency Callback</button>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ CONTACT FORM ════════ -->
+<section id="contact">
+  <div class="form-inner">
+    <div class="reveal">
+      <span class="section-label">Free Consultation</span>
+      <h2 class="form-title">Secure<br/>Your<br/>Investment.</h2>
+      <p class="form-desc">Schedule a comprehensive inspection with our senior engineering team. No obligation — just world-class expertise applied to your specific property.</p>
+      <div class="form-features">
+        <div class="form-feature">
+          <span class="material-symbols-outlined form-feature-icon">verified</span>
+          <span class="form-feature-text">Licensed & Fully Bonded in All 50 States</span>
+        </div>
+        <div class="form-feature">
+          <span class="material-symbols-outlined form-feature-icon">schedule</span>
+          <span class="form-feature-text">Response Within 2 Hours Guaranteed</span>
+        </div>
+        <div class="form-feature">
+          <span class="material-symbols-outlined form-feature-icon">workspace_premium</span>
+          <span class="form-feature-text">50-Year Structural Warranty Available</span>
+        </div>
+        <div class="form-feature">
+          <span class="material-symbols-outlined form-feature-icon">flight</span>
+          <span class="form-feature-text">Drone Inspection Included — No Charge</span>
+        </div>
+        <div class="form-feature">
+          <span class="material-symbols-outlined form-feature-icon">currency_dollar</span>
+          <span class="form-feature-text">Financing Available — 0% APR Options</span>
+        </div>
+        <div class="form-feature">
+          <span class="material-symbols-outlined form-feature-icon">shield</span>
+          <span class="form-feature-text">Insurance Claims Assistance Included</span>
+        </div>
+      </div>
+    </div>
+    <div class="form-right reveal reveal-delay-2">
+      <div class="form-step-indicator">
+        <div class="form-step-dot active" id="dot1"></div>
+        <div class="form-step-dot" id="dot2"></div>
+        <div class="form-step-dot" id="dot3"></div>
+      </div>
+
+      <!-- Step 1 -->
+      <div class="form-step active" id="step1">
+        <div style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.3em;text-transform:uppercase;color:var(--text-faint);margin-bottom:24px;">Step 01 / 03 — Your Information</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First Name *</label>
+            <input class="form-input" type="text" id="firstName" placeholder="JOHN" autocomplete="given-name"/>
+            <span class="form-error" id="firstNameErr">Required field</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name *</label>
+            <input class="form-input" type="text" id="lastName" placeholder="SMITH" autocomplete="family-name"/>
+            <span class="form-error" id="lastNameErr">Required field</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone Number *</label>
+          <input class="form-input" type="tel" id="phone" placeholder="+1 (000) 000-0000" autocomplete="tel"/>
+          <span class="form-error" id="phoneErr">Valid phone required</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address *</label>
+          <input class="form-input" type="email" id="email" placeholder="YOU@DOMAIN.COM" autocomplete="email"/>
+          <span class="form-error" id="emailErr">Valid email required</span>
+        </div>
+        <div class="form-nav">
+          <span class="form-step-label">Contact Details</span>
+          <button class="btn-primary" onclick="goToStep(2)">Next Step <span style="font-size:14px;">→</span></button>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="form-step" id="step2">
+        <div style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.3em;text-transform:uppercase;color:var(--text-faint);margin-bottom:24px;">Step 02 / 03 — Your Property</div>
+        <div class="form-group">
+          <label class="form-label">Property Address *</label>
+          <input class="form-input" type="text" id="address" placeholder="123 MAIN ST, AUSTIN TX" autocomplete="street-address"/>
+          <span class="form-error" id="addressErr">Address required</span>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Property Type *</label>
+            <select class="form-select" id="propType">
+              <option value="">SELECT TYPE</option>
+              <option value="residential">RESIDENTIAL ESTATE</option>
+              <option value="commercial">COMMERCIAL COMPLEX</option>
+              <option value="industrial">INDUSTRIAL FACILITY</option>
+              <option value="multifamily">MULTI-FAMILY</option>
+            </select>
+            <span class="form-error" id="propTypeErr">Please select type</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Approx. Roof Size</label>
+            <select class="form-select" id="roofSize">
+              <option value="">SELECT SIZE</option>
+              <option value="small">Under 1,500 sq ft</option>
+              <option value="medium">1,500–5,000 sq ft</option>
+              <option value="large">5,000–20,000 sq ft</option>
+              <option value="xlarge">20,000+ sq ft</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Service Needed *</label>
+          <select class="form-select" id="service">
+            <option value="">SELECT SERVICE</option>
+            <option value="inspection">Free Inspection Only</option>
+            <option value="repair">Roof Repair</option>
+            <option value="replacement">Full Replacement</option>
+            <option value="emergency">Emergency Service</option>
+            <option value="maintenance">Maintenance Contract</option>
+            <option value="new">New Construction</option>
+          </select>
+          <span class="form-error" id="serviceErr">Please select service</span>
+        </div>
+        <div class="form-nav">
+          <button class="btn-outline" onclick="goToStep(1)" style="padding:14px 24px;">← Back</button>
+          <button class="btn-primary" onclick="goToStep(3)">Next Step <span style="font-size:14px;">→</span></button>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="form-step" id="step3">
+        <div style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.3em;text-transform:uppercase;color:var(--text-faint);margin-bottom:24px;">Step 03 / 03 — Additional Details</div>
+        <div class="form-group">
+          <label class="form-label">Describe Your Situation</label>
+          <textarea class="form-textarea" id="message" placeholder="DESCRIBE THE ISSUE, DAMAGE, OR PROJECT SCOPE..."></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Preferred Contact Time</label>
+          <select class="form-select" id="contactTime">
+            <option value="">ANY TIME</option>
+            <option value="morning">MORNING (7AM - 12PM)</option>
+            <option value="afternoon">AFTERNOON (12PM - 5PM)</option>
+            <option value="evening">EVENING (5PM - 7PM)</option>
+            <option value="asap">CALL ME ASAP</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;">
+            <input type="checkbox" id="insurance" style="margin-top:3px;accent-color:var(--gold);"/>
+            <span style="font-size:12px;color:var(--text-muted);line-height:1.6;font-weight:300;">I may need assistance with an insurance claim and would like your claims team to contact me</span>
+          </label>
+        </div>
+        <div class="form-nav">
+          <button class="btn-outline" onclick="goToStep(2)" style="padding:14px 24px;">← Back</button>
+          <button class="btn-primary" onclick="submitForm()" id="submitBtn">
+            <span class="material-symbols-outlined" style="font-size:14px;">send</span>
+            Submit Request
+          </button>
+        </div>
+        <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+      </div>
+
+      <!-- Success State -->
+      <div class="form-success" id="formSuccess">
+        <div class="form-success-icon">
+          <span class="material-symbols-outlined" style="font-size:56px;font-variation-settings:'FILL' 1;">check_circle</span>
+        </div>
+        <div class="form-success-title">Request Received!</div>
+        <p class="form-success-desc">Your inspection request has been submitted. A Titan Roofing consultant will contact you within 2 hours during business hours, or first thing the next morning for after-hours submissions.</p>
+        <div style="margin-top:28px;">
+          <a href="tel:18008482766" class="btn-gold" style="margin:0 auto;display:inline-flex;">
+            <span class="material-symbols-outlined" style="font-size:14px;">call</span>
+            Call Us Now: 1-800-TITAN
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ FOOTER ════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">Titan<br/>Roofing</div>
+        <p class="footer-tagline">© 2025 Titan Roofing LLC.<br/>Licensed & Bonded.<br/>Defining engineering excellence<br/>in architectural roofing since 2004.</p>
+        <div class="footer-social">
+          <div class="social-btn">IG</div>
+          <div class="social-btn">FB</div>
+          <div class="social-btn">LI</div>
+          <div class="social-btn">TW</div>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li><a href="#services">Residential Roofing</a></li>
+          <li><a href="#services">Commercial Roofing</a></li>
+          <li><a href="#services">Industrial Systems</a></li>
+          <li><a href="#services">Emergency Repair</a></li>
+          <li><a href="#services">Roof Maintenance</a></li>
+          <li><a href="#services">Green & Solar Roof</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="#portfolio">Our Portfolio</a></li>
+          <li><a href="#process">Our Process</a></li>
+          <li><a href="#testimonials">Client Reviews</a></li>
+          <li><a href="#pricing">Pricing Guide</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <ul class="footer-links">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Warranty Information</a></li>
+          <li><a href="#">Insurance Claims</a></li>
+          <li><a href="#">Accessibility</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <div class="footer-contact-phone">1-800-TITAN-ROOF</div>
+        <div class="footer-contact-email">contact@titanroofing.com</div>
+        <div style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.1em;color:var(--text-faint);line-height:2.2;">
+          123 Engineering Blvd<br/>
+          Austin, TX 78701<br/><br/>
+          Mon–Fri: 7am – 7pm<br/>
+          Sat: 8am – 4pm<br/>
+          Emergency: 24/7
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">All Rights Reserved 2025 — Titan Roofing LLC — TX License #RCL1234567</span>
+      <div class="footer-badges">
+        <span class="footer-badge">NRCA Member</span>
+        <span class="footer-badge">GAF Elite</span>
+        <span class="footer-badge">LEED Certified</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ════════ LIVE CHAT ════════ -->
+<div id="chat-widget">
+  <div class="chat-panel" id="chatPanel">
+    <div class="chat-header">
+      <div class="chat-header-info">
+        <div class="chat-avatar">T</div>
+        <div>
+          <div class="chat-name">Titan Support</div>
+          <div class="chat-status">Online Now</div>
+        </div>
+      </div>
+      <button class="chat-close-btn" onclick="toggleChat()">
+        <span class="material-symbols-outlined" style="font-size:18px;">close</span>
+      </button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="chat-msg bot">
+        <div class="chat-bubble">Hi! 👋 I'm your Titan Roofing assistant. How can I help you today?</div>
+        <div class="chat-time">Just now</div>
+      </div>
+    </div>
+    <div class="chat-quick" id="chatQuick">
+      <button class="chat-quick-btn" onclick="sendQuick('Get a Free Quote')">Free Quote</button>
+      <button class="chat-quick-btn" onclick="sendQuick('Emergency Repair')">Emergency</button>
+      <button class="chat-quick-btn" onclick="sendQuick('Warranty Info')">Warranty</button>
+      <button class="chat-quick-btn" onclick="sendQuick('Financing Options')">Financing</button>
+    </div>
+    <div class="chat-input-wrap">
+      <input class="chat-input" id="chatInput" type="text" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendChatMsg()"/>
+      <button class="chat-send" onclick="sendChatMsg()"><span class="material-symbols-outlined">send</span></button>
+    </div>
+  </div>
+  <button class="chat-toggle" onclick="toggleChat()" aria-label="Chat with us">
+    <span class="material-symbols-outlined" id="chatIcon">chat</span>
+  </button>
+  <div class="chat-badge">1</div>
+</div>
+
+<script>
+/* ════════════════════════════════════════
+   PROGRESS BAR
+════════════════════════════════════════ */
+window.addEventListener('scroll', () => {
+  const doc = document.documentElement;
+  const scrolled = doc.scrollTop || document.body.scrollTop;
+  const total = doc.scrollHeight - doc.clientHeight;
+  document.getElementById('progress-bar').style.width = (scrolled / total * 100) + '%';
+});
+
+/* ════════════════════════════════════════
+   NAVBAR
+════════════════════════════════════════ */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 40);
+  document.getElementById('back-top').classList.toggle('visible', window.scrollY > 500);
+});
+
+/* ════════════════════════════════════════
+   HAMBURGER
+════════════════════════════════════════ */
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+let menuOpen = false;
+hamburger.addEventListener('click', () => {
+  menuOpen = !menuOpen;
+  mobileMenu.classList.toggle('open', menuOpen);
+  hamburger.querySelector('.material-symbols-outlined').textContent = menuOpen ? 'close' : 'menu';
+  document.body.style.overflow = menuOpen ? 'hidden' : '';
+});
+mobileMenu.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    menuOpen = false;
+    mobileMenu.classList.remove('open');
+    hamburger.querySelector('.material-symbols-outlined').textContent = 'menu';
+    document.body.style.overflow = '';
+  });
+});
+
+/* ════════════════════════════════════════
+   SCROLL REVEAL
+════════════════════════════════════════ */
+const revealEls = document.querySelectorAll('.reveal');
+const revObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+revealEls.forEach(el => revObs.observe(el));
+
+/* ════════════════════════════════════════
+   STAT COUNTERS
+════════════════════════════════════════ */
+document.querySelectorAll('.counter').forEach(el => {
+  const target = +el.dataset.target;
+  const cObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !el.dataset.done) {
+        el.dataset.done = 1;
+        const duration = 1600;
+        const start = performance.now();
+        const animate = (now) => {
+          const t = Math.min((now - start) / duration, 1);
+          const ease = 1 - Math.pow(1 - t, 3);
+          el.textContent = Math.floor(ease * target).toLocaleString();
+          if (t < 1) requestAnimationFrame(animate);
+          else el.textContent = target.toLocaleString();
+        };
+        requestAnimationFrame(animate);
+      }
+    });
+  }, { threshold: 0.5 });
+  cObs.observe(el);
+});
+
+/* ════════════════════════════════════════
+   ACTIVE NAV LINKS
+════════════════════════════════════════ */
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const navObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const id = e.target.id;
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === `#${id}`);
+      });
+    }
+  });
+}, { threshold: 0.35 });
+sections.forEach(s => navObs.observe(s));
+
+/* ════════════════════════════════════════
+   GALLERY FILTER
+════════════════════════════════════════ */
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      const show = filter === 'all' || item.dataset.category === filter;
+      item.style.display = show ? '' : 'none';
+      if (show) {
+        item.style.animation = 'fadeIn 0.4s ease';
+        setTimeout(() => item.style.animation = '', 400);
+      }
+    });
+  });
+});
+
+/* ════════════════════════════════════════
+   LIGHTBOX
+════════════════════════════════════════ */
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+const lightboxCaption = document.getElementById('lightboxCaption');
+let galleryItems = [];
+let currentLightboxIdx = 0;
+
+document.querySelectorAll('.gallery-item').forEach((item, idx) => {
+  galleryItems.push({ img: item.dataset.img, title: item.dataset.title, tag: item.dataset.tag });
+  item.addEventListener('click', () => openLightbox(idx));
+});
+
+function openLightbox(idx) {
+  currentLightboxIdx = idx;
+  const d = galleryItems[idx];
+  lightboxImg.src = d.img;
+  lightboxImg.alt = d.title;
+  lightboxCaption.textContent = `${d.tag} — ${d.title}`;
+  lightbox.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+document.getElementById('lightboxPrev').addEventListener('click', () => {
+  currentLightboxIdx = (currentLightboxIdx - 1 + galleryItems.length) % galleryItems.length;
+  openLightbox(currentLightboxIdx);
+});
+document.getElementById('lightboxNext').addEventListener('click', () => {
+  currentLightboxIdx = (currentLightboxIdx + 1) % galleryItems.length;
+  openLightbox(currentLightboxIdx);
+});
+document.addEventListener('keydown', (e) => {
+  if (!lightbox.classList.contains('active')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') { currentLightboxIdx = (currentLightboxIdx - 1 + galleryItems.length) % galleryItems.length; openLightbox(currentLightboxIdx); }
+  if (e.key === 'ArrowRight') { currentLightboxIdx = (currentLightboxIdx + 1) % galleryItems.length; openLightbox(currentLightboxIdx); }
+});
+function closeLightbox() {
+  lightbox.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+/* ════════════════════════════════════════
+   BEFORE / AFTER SLIDER
+════════════════════════════════════════ */
+const baWrap = document.getElementById('baWrap');
+const baBefore = document.getElementById('baBefore');
+const baDivider = document.getElementById('baDivider');
+const baHandle = document.getElementById('baHandle');
+let baActive = false;
+
+function setBA(x) {
+  const rect = baWrap.getBoundingClientRect();
+  let pct = Math.min(Math.max((x - rect.left) / rect.width, 0.02), 0.98);
+  baBefore.style.clipPath = `inset(0 ${(1 - pct) * 100}% 0 0)`;
+  baDivider.style.left = (pct * 100) + '%';
+  baHandle.style.left = (pct * 100) + '%';
+}
+baWrap.addEventListener('mousedown', (e) => { baActive = true; setBA(e.clientX); });
+window.addEventListener('mousemove', (e) => { if (baActive) setBA(e.clientX); });
+window.addEventListener('mouseup', () => baActive = false);
+baWrap.addEventListener('touchstart', (e) => { baActive = true; setBA(e.touches[0].clientX); }, {passive:true});
+window.addEventListener('touchmove', (e) => { if (baActive) setBA(e.touches[0].clientX); }, {passive:true});
+window.addEventListener('touchend', () => baActive = false);
+// Initial position
+setBA(baWrap.getBoundingClientRect().left + baWrap.getBoundingClientRect().width / 2);
+
+/* ════════════════════════════════════════
+   TESTIMONIALS SLIDER
+════════════════════════════════════════ */
+const track = document.getElementById('testimonialsTrack');
+const slides = track.querySelectorAll('.testimonial-slide');
+const dotsContainer = document.getElementById('sliderDots');
+const countEl = document.getElementById('testimonialCount');
+let currentSlide = 0;
+const totalSlides = slides.length;
+
+slides.forEach((_, i) => {
+  const dot = document.createElement('div');
+  dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+  dot.addEventListener('click', () => goSlide(i));
+  dotsContainer.appendChild(dot);
+});
+
+function goSlide(idx) {
+  currentSlide = (idx + totalSlides) % totalSlides;
+  track.style.transform = `translateX(-${currentSlide * 100}%)`;
+  dotsContainer.querySelectorAll('.slider-dot').forEach((d, i) => d.classList.toggle('active', i === currentSlide));
+  countEl.textContent = String(currentSlide + 1).padStart(2, '0') + ' / ' + String(totalSlides).padStart(2, '0');
+}
+document.getElementById('sliderPrev').addEventListener('click', () => goSlide(currentSlide - 1));
+document.getElementById('sliderNext').addEventListener('click', () => goSlide(currentSlide + 1));
+
+// Auto-advance
+setInterval(() => goSlide(currentSlide + 1), 6000);
+
+// Touch swipe on testimonials
+let touchStartX = 0;
+track.addEventListener('touchstart', (e) => touchStartX = e.touches[0].clientX, {passive:true});
+track.addEventListener('touchend', (e) => {
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 50) goSlide(diff > 0 ? currentSlide + 1 : currentSlide - 1);
+});
+
+/* ════════════════════════════════════════
+   FAQ ACCORDION
+════════════════════════════════════════ */
+document.querySelectorAll('.faq-question').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+
+/* ════════════════════════════════════════
+   MULTI-STEP FORM
+════════════════════════════════════════ */
+function goToStep(step) {
+  if (step === 2) {
+    // Validate step 1
+    let ok = true;
+    if (!document.getElementById('firstName').value.trim()) { showErr('firstName', 'firstNameErr'); ok = false; } else hideErr('firstName', 'firstNameErr');
+    if (!document.getElementById('lastName').value.trim()) { showErr('lastName', 'lastNameErr'); ok = false; } else hideErr('lastName', 'lastNameErr');
+    const phone = document.getElementById('phone').value.trim();
+    if (!phone || phone.replace(/\D/g, '').length < 7) { showErr('phone', 'phoneErr'); ok = false; } else hideErr('phone', 'phoneErr');
+    const email = document.getElementById('email').value.trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showErr('email', 'emailErr'); ok = false; } else hideErr('email', 'emailErr');
+    if (!ok) return;
+  }
+  if (step === 3) {
+    // Validate step 2
+    let ok = true;
+    if (!document.getElementById('address').value.trim()) { showErr('address', 'addressErr'); ok = false; } else hideErr('address', 'addressErr');
+    if (!document.getElementById('propType').value) { showErr('propType', 'propTypeErr'); ok = false; } else hideErr('propType', 'propTypeErr');
+    if (!document.getElementById('service').value) { showErr('service', 'serviceErr'); ok = false; } else hideErr('service', 'serviceErr');
+    if (!ok) return;
+  }
+  document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step' + step).classList.add('active');
+  ['dot1','dot2','dot3'].forEach((id, i) => {
+    const dot = document.getElementById(id);
+    dot.classList.remove('active','done');
+    if (i + 1 < step) dot.classList.add('done');
+    else if (i + 1 === step) dot.classList.add('active');
+  });
+}
+
+function showErr(inputId, errId) {
+  document.getElementById(inputId).classList.add('error');
+  document.getElementById(errId).style.display = 'block';
+}
+function hideErr(inputId, errId) {
+  document.getElementById(inputId).classList.remove('error');
+  document.getElementById(errId).style.display = 'none';
+}
+
+function getLeadPayload() {
+  return {
+    firstName: document.getElementById('firstName').value.trim(),
+    lastName: document.getElementById('lastName').value.trim(),
+    phone: document.getElementById('phone').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    address: document.getElementById('address').value.trim(),
+    propertyType: document.getElementById('propType').value,
+    roofSize: document.getElementById('roofSize').value,
+    service: document.getElementById('service').value,
+    message: document.getElementById('message').value.trim(),
+    contactTime: document.getElementById('contactTime').value,
+    insurance: document.getElementById('insurance').checked,
+    pageUrl: window.location.href,
+    referrer: document.referrer || '',
+    utm: Object.fromEntries(new URLSearchParams(window.location.search).entries())
+  };
+}
+
+function setFormStatus(message, type = 'info') {
+  const status = document.getElementById('formStatus');
+  status.textContent = message;
+  status.className = 'form-status ' + type;
+}
+
+function clearFormStatus() {
+  const status = document.getElementById('formStatus');
+  status.textContent = '';
+  status.className = 'form-status';
+}
+
+async function submitForm() {
+  const btn = document.getElementById('submitBtn');
+  const original = btn.innerHTML;
+  clearFormStatus();
+  btn.innerHTML = 'Submitting...';
+  btn.disabled = true;
+
+  try {
+    const response = await fetch('/api/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(getLeadPayload())
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      throw new Error(result.error || 'Submission failed. Please try again or call us directly.');
+    }
+
+    document.querySelectorAll('.form-step').forEach(s => s.style.display = 'none');
+    document.querySelector('.form-step-indicator').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  } catch (error) {
+    setFormStatus(error.message, 'error');
+    btn.innerHTML = original;
+    btn.disabled = false;
+  }
+}
+
+/* ════════════════════════════════════════
+   COOKIE BANNER
+════════════════════════════════════════ */
+setTimeout(() => {
+  if (!localStorage.getItem('cookieConsent')) {
+    document.getElementById('cookie-banner').classList.add('show');
+  }
+}, 2000);
+function acceptCookies() {
+  localStorage.setItem('cookieConsent', 'accepted');
+  document.getElementById('cookie-banner').classList.remove('show');
+}
+function declineCookies() {
+  localStorage.setItem('cookieConsent', 'declined');
+  document.getElementById('cookie-banner').classList.remove('show');
+}
+
+/* ════════════════════════════════════════
+   CHAT WIDGET
+════════════════════════════════════════ */
+const chatPanel = document.getElementById('chatPanel');
+const chatIcon = document.getElementById('chatIcon');
+const chatMessages = document.getElementById('chatMessages');
+const chatBadge = document.querySelector('.chat-badge');
+let chatOpen = false;
+
+const chatReplies = {
+  'get a free quote': "We'd love to give you a free quote! Please fill out our form above or call us at 1-800-TITAN-ROOF. We can typically schedule an inspection within 24 hours.",
+  'emergency repair': "For emergencies, call us immediately at 1-800-TITAN-ROOF. Our teams are on standby 24/7 and can be on-site within 2 hours. Don't wait — call now!",
+  'warranty info': "Our Titan Elite projects come with a 50-year structural warranty. Premium projects include 30 years. All warranties are transferable to new property owners. Want more details?",
+  'financing options': "We offer 0% APR financing for 18 months on qualifying projects, and extended payment plans up to 10 years. We also work directly with your insurance company on storm damage claims.",
+};
+
+function toggleChat() {
+  chatOpen = !chatOpen;
+  chatPanel.classList.toggle('open', chatOpen);
+  chatIcon.textContent = chatOpen ? 'close' : 'chat';
+  chatBadge.style.display = chatOpen ? 'none' : 'flex';
+  if (chatOpen) document.getElementById('chatInput').focus();
+}
+
+function addMsg(text, type) {
+  const div = document.createElement('div');
+  div.className = 'chat-msg ' + type;
+  const now = new Date();
+  const time = now.getHours() + ':' + String(now.getMinutes()).padStart(2,'0');
+  div.innerHTML = `<div class="chat-bubble">${text}</div><div class="chat-time">${time}</div>`;
+  chatMessages.appendChild(div);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function getBotReply(text) {
+  const key = text.toLowerCase().trim();
+  for (const [k, v] of Object.entries(chatReplies)) {
+    if (key.includes(k.split(' ')[0])) return v;
+  }
+  return "Thanks for reaching out! A Titan Roofing specialist will follow up with you shortly. For immediate assistance, please call 1-800-TITAN-ROOF or fill out our contact form above.";
+}
+
+function sendChatMsg() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
+  addMsg(text, 'user');
+  input.value = '';
+  document.getElementById('chatQuick').style.display = 'none';
+  setTimeout(() => addMsg(getBotReply(text), 'bot'), 800);
+}
+
+function sendQuick(text) {
+  addMsg(text, 'user');
+  document.getElementById('chatQuick').style.display = 'none';
+  setTimeout(() => addMsg(getBotReply(text), 'bot'), 800);
+}
+
+/* ════════════════════════════════════════
+   PHONE NUMBER FORMATTING
+════════════════════════════════════════ */
+document.getElementById('phone').addEventListener('input', function() {
+  let v = this.value.replace(/\D/g, '').slice(0, 10);
+  if (v.length >= 7) v = '(' + v.slice(0,3) + ') ' + v.slice(3,6) + '-' + v.slice(6);
+  else if (v.length >= 4) v = '(' + v.slice(0,3) + ') ' + v.slice(3);
+  this.value = v;
+});
+
+/* ════════════════════════════════════════
+   SMOOTH ANCHOR SCROLLING
+════════════════════════════════════════ */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', (e) => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({behavior:'smooth', block:'start'}); }
+  });
+});
+
+</script>
+</body>
+</html>
