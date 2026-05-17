@@ -211,7 +211,13 @@ button { cursor: pointer; }
 }
 .service-card h3 { margin: 0; font-size: 22px; letter-spacing: -0.02em; }
 .service-card p { margin: 0; color: var(--muted); line-height: 1.65; }
-.mini-link { display: inline-flex; align-items: center; gap: 8px; color: var(--blue); font-weight: 900; margin-top: 4px; }
+.mini-link {
+  display: inline-flex; align-items: center; gap: 8px; width: fit-content;
+  color: var(--blue); font-weight: 900; margin-top: 4px; padding: 0;
+  border: 0; background: transparent; appearance: none; -webkit-appearance: none;
+  line-height: 1.2; text-align: left;
+}
+.mini-link:hover { color: #1d4ed8; }
 
 .split {
   display: grid; grid-template-columns: minmax(0, .9fr) minmax(360px, .8fr); gap: clamp(28px, 5vw, 70px); align-items: center;
