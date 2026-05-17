@@ -222,7 +222,7 @@ button { cursor: pointer; }
   border-y: 1px solid var(--line); background: #fffaf4;
 }
 .logo-row .container {
-  min-height: 92px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px; align-items: center;
+  min-height: 92px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px; align-items: center; justify-items: center;
   color: #8190a5; font-size: 12px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase;
 }
 .logo-row span { display: inline-flex; justify-content: center; align-items: center; gap: 8px; text-align: center; }
@@ -451,15 +451,25 @@ footer p { margin: 8px 0 0; color: #8fa0b5; }
 }
 .chat-panel.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
 .chat-head { padding: 16px; background: var(--slate); color: white; display: flex; justify-content: space-between; align-items: center; }
+.chat-status { display: inline-flex; align-items: center; gap: 7px; color: #d9cbb8; font-size: 12px; font-weight: 800; }
+.chat-status::before { content: ""; width: 8px; height: 8px; border-radius: 999px; background: #35c56f; box-shadow: 0 0 0 5px rgba(53,197,111,.16); }
 .chat-messages { padding: 16px; max-height: 280px; overflow: auto; display: grid; gap: 10px; }
 .chat-msg { display: grid; gap: 4px; }
 .chat-msg.user { justify-items: end; }
 .chat-bubble { max-width: 86%; padding: 10px 12px; border-radius: 15px; background: var(--soft); color: var(--slate); line-height: 1.45; font-size: 14px; }
 .chat-msg.user .chat-bubble { background: var(--blue); color: white; }
 .chat-time { color: var(--muted); font-size: 11px; }
+.chat-quick { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 16px 14px; }
+.chat-quick button {
+  border: 1px solid var(--line); background: #fffaf4; color: var(--slate); border-radius: 999px;
+  padding: 8px 10px; font-size: 12px; font-weight: 900;
+}
+.chat-quick button:hover { border-color: #d3b88f; background: var(--cream); }
 .chat-input-row { display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--line); }
 .chat-input { flex: 1; min-width: 0; border: 1px solid var(--line); border-radius: 999px; padding: 10px 12px; outline: none; }
-.chat-send { width: 42px; height: 42px; border-radius: 999px; border: 0; background: var(--blue); color: white; }
+.chat-input:focus { border-color: var(--green); box-shadow: 0 0 0 4px rgba(31,111,85,.12); }
+.chat-send { flex: 0 0 42px; width: 42px; height: 42px; border-radius: 999px; border: 0; background: var(--blue); color: white; }
+.chat-send:disabled { opacity: .55; cursor: wait; }
 
 .reveal { opacity: 0; transform: translateY(22px); transition: opacity .65s ease, transform .65s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -502,7 +512,9 @@ footer p { margin: 8px 0 0; color: #8fa0b5; }
   .floating-badge.two { right: 10px; top: 72px; }
   .floating-badge.three { left: 10px; bottom: 122px; transform: none; }
   .ba-shell { transform: none; }
-  .logo-row .container { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 18px 0; }
+  .logo-row .container { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 18px 0; justify-items: stretch; }
+  .logo-row span { justify-content: flex-start; padding-left: clamp(28px, 8vw, 52px); }
+  .logo-row span:last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; padding-left: 0; }
   .service-grid, .pricing-grid, .portfolio-grid { grid-template-columns: 1fr; }
   .promise-stats, .steps-grid { grid-template-columns: 1fr; }
   .section { padding: 68px 0; }
@@ -521,6 +533,9 @@ footer p { margin: 8px 0 0; color: #8fa0b5; }
   .btn { white-space: normal; text-align: center; }
   .trust-pill { padding: 12px; }
   .contact-panel, .form-card, .service-card, .pricing { padding: 20px; }
+  .chat-button { right: 14px; bottom: 14px; width: 54px; height: 54px; }
+  .chat-panel { right: 10px; left: 10px; bottom: 78px; width: auto; max-height: calc(100svh - 96px); }
+  .chat-messages { max-height: min(320px, 46svh); }
 }
 </style>
 </head>
@@ -857,16 +872,21 @@ footer p { margin: 8px 0 0; color: #8fa0b5; }
 </footer>
 
 <div class="chat-panel" id="chatPanel" aria-live="polite">
-  <div class="chat-head"><strong>Titan Roofing Assistant</strong><span>Online</span></div>
+  <div class="chat-head"><strong>Titan Roofing Assistant</strong><span class="chat-status" id="chatStatus">Online</span></div>
   <div class="chat-messages" id="chatMessages">
-    <div class="chat-msg"><div class="chat-bubble">Hi. Need a roof inspection, repair, or emergency callback?</div><div class="chat-time">Now</div></div>
+    <div class="chat-msg bot"><div class="chat-bubble">Hi. Need a roof inspection, repair, or emergency callback?</div><div class="chat-time">Now</div></div>
+  </div>
+  <div class="chat-quick" id="chatQuick">
+    <button type="button" onclick="sendQuickChat('I need a free inspection')">Free inspection</button>
+    <button type="button" onclick="sendQuickChat('I have an emergency roof leak')">Emergency leak</button>
+    <button type="button" onclick="sendQuickChat('I need help with insurance')">Insurance claim</button>
   </div>
   <div class="chat-input-row">
-    <input class="chat-input" id="chatInput" type="text" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendChatMsg()"/>
-    <button class="chat-send" onclick="sendChatMsg()" aria-label="Send chat message"><span class="material-symbols-outlined">send</span></button>
+    <input class="chat-input" id="chatInput" type="text" maxlength="240" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendChatMsg()"/>
+    <button class="chat-send" id="chatSend" onclick="sendChatMsg()" aria-label="Send chat message"><span class="material-symbols-outlined">send</span></button>
   </div>
 </div>
-<button class="chat-button" id="chatButton" onclick="toggleChat()" aria-label="Open chat"><span class="material-symbols-outlined" id="chatIcon">chat</span></button>
+<button class="chat-button" id="chatButton" onclick="toggleChat()" aria-label="Open chat" aria-expanded="false" aria-controls="chatPanel"><span class="material-symbols-outlined" id="chatIcon">chat</span></button>
 
 <script>
 const mobileToggle = document.getElementById('mobileToggle');
@@ -1031,41 +1051,79 @@ document.getElementById('phone').addEventListener('input', function() {
 const chatPanel = document.getElementById('chatPanel');
 const chatIcon = document.getElementById('chatIcon');
 const chatMessages = document.getElementById('chatMessages');
+const chatButton = document.getElementById('chatButton');
+const chatInput = document.getElementById('chatInput');
+const chatSend = document.getElementById('chatSend');
+const chatQuick = document.getElementById('chatQuick');
+const chatStatus = document.getElementById('chatStatus');
 let chatOpen = false;
+let chatBusy = false;
 const chatReplies = {
-  quote: "Absolutely. The fastest way is to complete the inspection form and our team will follow up with next steps.",
-  emergency: "For active leaks or urgent storm damage, call 1-800-TITAN-ROOF now. You can also submit the form and choose emergency service.",
-  warranty: "Replacement projects include warranty options based on material system and scope. We explain those clearly during the estimate.",
-  insurance: "We can help document storm damage and coordinate repair scope conversations with your insurance adjuster."
+  quote: "Absolutely. I can help you start with a free inspection. Tap the contact form and choose the service that best matches your roof.",
+  emergency: "If water is actively entering the property, call 1-800-TITAN-ROOF now. I can also take you to the form and pre-select Emergency Service.",
+  warranty: "Replacement projects include workmanship and material warranty options. The inspection team will explain coverage by roof system.",
+  insurance: "We can help document storm damage, photos, and repair scope for your claim. Choose the insurance checkbox in the form.",
+  pricing: "Every roof is different, so Titan gives a clear inspection-backed estimate before work begins. No vague scope, no surprise handoff.",
+  fallback: "Thanks. The best next step is a free roof inspection so a Titan specialist can review your roof and follow up with a clear plan."
 };
 function toggleChat() {
   chatOpen = !chatOpen;
   chatPanel.classList.toggle('open', chatOpen);
   chatIcon.textContent = chatOpen ? 'close' : 'chat';
-  if (chatOpen) document.getElementById('chatInput').focus();
+  chatButton.setAttribute('aria-expanded', String(chatOpen));
+  if (chatOpen) chatInput.focus();
 }
-function addMsg(text, type) {
+function formatChatTime() {
+  const now = new Date();
+  return now.getHours() + ':' + String(now.getMinutes()).padStart(2, '0');
+}
+function addMsg(text, type = 'bot') {
   const div = document.createElement('div');
   div.className = 'chat-msg ' + type;
-  const now = new Date();
-  div.innerHTML = '<div class="chat-bubble">' + escapeHtml(text) + '</div><div class="chat-time">' + now.getHours() + ':' + String(now.getMinutes()).padStart(2, '0') + '</div>';
+  div.innerHTML = '<div class="chat-bubble">' + escapeHtml(text) + '</div><div class="chat-time">' + formatChatTime() + '</div>';
   chatMessages.appendChild(div);
   chatMessages.scrollTop = chatMessages.scrollHeight;
 }
+function setChatBusy(isBusy) {
+  chatBusy = isBusy;
+  chatSend.disabled = isBusy;
+  chatStatus.textContent = isBusy ? 'Typing' : 'Online';
+}
 function getBotReply(text) {
   const key = text.toLowerCase();
-  if (key.includes('emergency') || key.includes('leak')) return chatReplies.emergency;
-  if (key.includes('warranty')) return chatReplies.warranty;
-  if (key.includes('insurance') || key.includes('claim')) return chatReplies.insurance;
-  return chatReplies.quote;
+  if (key.includes('emergency') || key.includes('urgent') || key.includes('leak') || key.includes('water')) return chatReplies.emergency;
+  if (key.includes('warranty') || key.includes('guarantee')) return chatReplies.warranty;
+  if (key.includes('insurance') || key.includes('claim') || key.includes('storm') || key.includes('hail')) return chatReplies.insurance;
+  if (key.includes('price') || key.includes('cost') || key.includes('quote') || key.includes('estimate')) return chatReplies.pricing;
+  if (key.includes('inspection') || key.includes('repair') || key.includes('replace') || key.includes('roof')) return chatReplies.quote;
+  return chatReplies.fallback;
+}
+function afterBotReply(text) {
+  if (/emergency|urgent|leak|water/i.test(text)) {
+    document.getElementById('service').value = 'emergency';
+  }
+  if (/insurance|claim|storm|hail/i.test(text)) {
+    document.getElementById('insurance').checked = true;
+  }
+}
+function sendChatText(text) {
+  if (chatBusy || !text) return;
+  addMsg(text, 'user');
+  chatInput.value = '';
+  chatQuick.style.display = 'none';
+  setChatBusy(true);
+  window.setTimeout(() => {
+    addMsg(getBotReply(text), 'bot');
+    afterBotReply(text);
+    setChatBusy(false);
+  }, 650);
 }
 function sendChatMsg() {
-  const input = document.getElementById('chatInput');
-  const text = input.value.trim();
-  if (!text) return;
-  addMsg(text, 'user');
-  input.value = '';
-  setTimeout(() => addMsg(getBotReply(text), 'bot'), 550);
+  sendChatText(chatInput.value.trim());
+}
+function sendQuickChat(text) {
+  if (!chatOpen) toggleChat();
+  sendChatText(text);
 }
 function escapeHtml(value) {
   return String(value || '').replace(/[&<>"']/g, (char) => ({
