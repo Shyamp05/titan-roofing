@@ -93,13 +93,14 @@ button { cursor: pointer; }
 .btn-amber:hover { background: var(--amber-dark); }
 
 .top-strip {
-  background: #20342a; color: #f7ead8; font-size: 13px; font-weight: 700;
+  background: #20342a; color: #f7ead8; font-size: 13px; font-weight: 800;
 }
 .top-strip .container {
-  min-height: 42px; display: flex; align-items: center; justify-content: space-between; gap: 18px;
+  min-height: 44px; display: flex; align-items: center; justify-content: center; gap: 20px;
 }
 .top-strip strong { color: #fff; }
-.top-strip span { display: inline-flex; align-items: center; gap: 8px; }
+.top-strip span { display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-align: center; }
+.top-strip .top-secondary { opacity: .92; }
 
 .nav {
   position: sticky; top: 0; z-index: 1000; background: rgba(251,244,234,.88);
@@ -496,7 +497,9 @@ footer p { margin: 8px 0 0; color: #8fa0b5; }
 
 @media (max-width: 720px) {
   .container { width: min(100% - 24px, var(--container)); }
-  .top-strip .container { min-height: auto; padding: 10px 0; align-items: flex-start; flex-direction: column; gap: 8px; }
+  .top-strip .container { min-height: auto; padding: 10px 0; flex-direction: column; gap: 6px; }
+  .top-strip span { width: 100%; line-height: 1.35; }
+  .top-strip .top-secondary { font-size: 12px; max-width: 290px; margin: 0 auto; }
   .nav-inner { height: 70px; }
   .brand small { display: none; }
   .brand-mark { width: 38px; height: 38px; }
@@ -543,7 +546,7 @@ footer p { margin: 8px 0 0; color: #8fa0b5; }
 <div class="top-strip">
   <div class="container">
     <span><span class="material-symbols-outlined">emergency_home</span><strong>24/7 emergency roofing</strong></span>
-    <span>Free inspections • Licensed crews • Warranty-backed work</span>
+    <span class="top-secondary">Free inspections • Licensed crews • Warranty-backed work</span>
   </div>
 </div>
 
