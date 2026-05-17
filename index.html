@@ -198,25 +198,28 @@ button { cursor: pointer; }
 .hero-photo::after {
   content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 48%, rgba(12,24,38,.58));
 }
-.photo-panel {
-  position: absolute; left: 18px; right: 18px; bottom: 18px; z-index: 2;
-  display: grid; gap: 10px; color: white;
+.hero-interactive {
+  position: absolute; left: 18px; right: 18px; bottom: 18px; z-index: 5;
+  border-radius: 26px; border: 1px solid rgba(255,255,255,.38);
+  background: rgba(255,250,244,.86); color: var(--slate); box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(18px); overflow: hidden; transform: translateZ(76px);
 }
-.photo-panel > div {
-  display: flex; justify-content: space-between; gap: 14px; align-items: center;
-  padding: 14px; border-radius: 18px; background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.22); backdrop-filter: blur(14px);
+.hero-tabs {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px;
+  padding: 8px; border-bottom: 1px solid rgba(229,215,196,.78);
 }
-.photo-panel strong { font-size: 15px; }
-.photo-panel span { font-size: 12px; opacity: .9; }
-.floating-badge {
-  position: absolute; z-index: 4; display: inline-flex; align-items: center; gap: 10px;
-  padding: 12px 14px; border-radius: 999px; background: rgba(255,250,244,.94);
-  border: 1px solid var(--line); color: var(--slate); font-weight: 900; box-shadow: var(--shadow-md);
-  transform: translateZ(72px);
+.hero-tab {
+  min-width: 0; border: 0; border-radius: 999px; padding: 10px 8px;
+  background: transparent; color: var(--muted); font-size: 12px; font-weight: 900;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
 }
-.floating-badge small { color: var(--muted); font-size: 11px; font-weight: 800; }
-.floating-badge.one { left: 18px; top: 66px; }
-.floating-badge.two { right: 18px; top: 42%; }
+.hero-tab.active { background: var(--slate); color: #fff7ea; box-shadow: var(--shadow-sm); }
+.hero-tab .material-symbols-outlined { font-size: 17px; }
+.hero-tab span:last-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hero-detail { padding: 16px 18px 18px; display: grid; gap: 6px; }
+.hero-detail strong { font-size: clamp(18px, 2.1vw, 24px); letter-spacing: -0.04em; }
+.hero-detail p { margin: 0; color: var(--muted); line-height: 1.45; font-size: 14px; }
+.hero-detail .mini-link { margin-top: 4px; font-size: 14px; }
 
 .logo-row {
   border-y: 1px solid var(--line); background: #fffaf4;
@@ -507,11 +510,11 @@ footer p { margin: 8px 0 0; color: #8fa0b5; }
   .hero h1 { font-size: clamp(42px, 14vw, 58px); }
   .hero-actions .btn, .final-cta .btn, .form-nav .btn { width: 100%; }
   .hero-trust { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .hero-photo { aspect-ratio: 4/4.3; }
-  .photo-panel { left: 12px; right: 12px; bottom: 12px; }
-  .floating-badge { font-size: 12px; padding: 9px 10px; transform: none; }
-  .floating-badge.one { left: 10px; top: 12px; }
-  .floating-badge.two { right: 10px; top: 72px; }
+  .hero-photo { aspect-ratio: 4/4.65; }
+  .hero-interactive { left: 10px; right: 10px; bottom: 10px; border-radius: 22px; transform: none; }
+  .hero-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+  .hero-tab { padding: 9px 8px; font-size: 11px; }
+  .hero-detail { padding: 14px; }
   .ba-shell { transform: none; }
   .logo-row .container { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 18px 0; justify-items: stretch; }
   .logo-row span { justify-content: flex-start; padding-left: clamp(28px, 8vw, 52px); }
@@ -599,11 +602,18 @@ footer p { margin: 8px 0 0; color: #8fa0b5; }
     <div class="hero-card reveal">
       <div class="hero-photo">
         <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=82&fit=crop&auto=format" alt="Premium residential roofing project" fetchpriority="high"/>
-        <div class="floating-badge one"><span class="material-symbols-outlined">workspace_premium</span><span>Warranty<small> included</small></span></div>
-        <div class="floating-badge two"><span class="material-symbols-outlined">verified</span><span>A+<small> rated</small></span></div>
-        <div class="photo-panel">
-          <div><strong>Price clarity</strong><span>No surprise markups</span></div>
-          <div><strong>Project updates</strong><span>Know what happens next</span></div>
+        <div class="hero-interactive" aria-label="Titan Roofing proof highlights">
+          <div class="hero-tabs" role="tablist" aria-label="Roofing highlights">
+            <button class="hero-tab active" type="button" data-title="Warranty included" data-copy="Workmanship and material warranty options are explained before you approve the project." data-action="View warranty details"><span class="material-symbols-outlined">workspace_premium</span><span>Warranty</span></button>
+            <button class="hero-tab" type="button" data-title="A+ rated crews" data-copy="Local crews, clean jobsite standards, and project communication that keeps homeowners confident." data-action="See trust proof"><span class="material-symbols-outlined">verified</span><span>A+ rated</span></button>
+            <button class="hero-tab" type="button" data-title="Price clarity" data-copy="Inspection-backed estimates with clear scope, material choices, and no surprise markups." data-action="Get clear quote"><span class="material-symbols-outlined">payments</span><span>Pricing</span></button>
+            <button class="hero-tab" type="button" data-title="Project updates" data-copy="Know what happens next with text-friendly scheduling, weather notes, and final walkthroughs." data-action="Start project"><span class="material-symbols-outlined">sms</span><span>Updates</span></button>
+          </div>
+          <div class="hero-detail">
+            <strong id="heroDetailTitle">Warranty included</strong>
+            <p id="heroDetailCopy">Workmanship and material warranty options are explained before you approve the project.</p>
+            <button class="mini-link" type="button" id="heroDetailAction" onclick="scrollToContact()">View warranty details <span class="material-symbols-outlined">arrow_forward</span></button>
+          </div>
         </div>
       </div>
     </div>
@@ -917,6 +927,20 @@ const revealObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
 revealEls.forEach((el) => revealObserver.observe(el));
+
+const heroTabs = document.querySelectorAll('.hero-tab');
+const heroDetailTitle = document.getElementById('heroDetailTitle');
+const heroDetailCopy = document.getElementById('heroDetailCopy');
+const heroDetailAction = document.getElementById('heroDetailAction');
+heroTabs.forEach((tab) => {
+  tab.addEventListener('click', () => {
+    heroTabs.forEach((item) => item.classList.remove('active'));
+    tab.classList.add('active');
+    heroDetailTitle.textContent = tab.dataset.title;
+    heroDetailCopy.textContent = tab.dataset.copy;
+    heroDetailAction.innerHTML = escapeHtml(tab.dataset.action) + ' <span class="material-symbols-outlined">arrow_forward</span>';
+  });
+});
 
 const slider = document.getElementById('beforeAfter');
 let sliderActive = false;
