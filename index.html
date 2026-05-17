@@ -15,22 +15,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,500,0,0&display=swap" rel="stylesheet"/>
 <style>
 :root {
-  --ink: #17202a;
-  --muted: #627084;
-  --soft: #eef3f8;
+  --ink: #151b17;
+  --muted: #5e665f;
+  --soft: #f4eadc;
   --paper: #ffffff;
-  --cream: #f8fafc;
-  --line: #dce4ed;
-  --slate: #24384f;
-  --blue: #2563eb;
-  --blue-soft: #dbeafe;
-  --amber: #d99120;
-  --amber-dark: #a9650f;
-  --green: #17803d;
-  --shadow-sm: 0 8px 24px rgba(20, 38, 63, 0.08);
-  --shadow-md: 0 18px 48px rgba(20, 38, 63, 0.12);
-  --shadow-lg: 0 28px 80px rgba(20, 38, 63, 0.18);
-  --radius: 22px;
+  --cream: #fbf4ea;
+  --cream-strong: #f2e2cc;
+  --line: #e5d7c4;
+  --slate: #1f3329;
+  --blue: #1f6f55;
+  --blue-soft: #e3f3ec;
+  --amber: #c9792c;
+  --amber-dark: #8e4d19;
+  --green: #1f6f55;
+  --shadow-sm: 0 8px 24px rgba(65, 45, 26, 0.07);
+  --shadow-md: 0 18px 48px rgba(65, 45, 26, 0.11);
+  --shadow-lg: 0 28px 80px rgba(65, 45, 26, 0.16);
+  --radius: 28px;
   --container: 1180px;
 }
 
@@ -39,7 +40,7 @@ html { scroll-behavior: smooth; overflow-x: hidden; }
 body {
   margin: 0;
   color: var(--ink);
-  background: var(--paper);
+  background: var(--cream);
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -54,7 +55,7 @@ button { cursor: pointer; }
 .material-symbols-outlined { font-size: 20px; line-height: 1; vertical-align: middle; }
 .container { width: min(100% - 32px, var(--container)); margin: 0 auto; }
 .section { padding: clamp(72px, 9vw, 128px) 0; position: relative; }
-.section-soft { background: linear-gradient(180deg, #f7fafc 0%, #ffffff 100%); }
+.section-soft { background: linear-gradient(180deg, #fffaf3 0%, #f7ecdc 100%); }
 .eyebrow {
   display: inline-flex; align-items: center; gap: 10px;
   color: var(--blue); font-size: 12px; font-weight: 800;
@@ -68,7 +69,7 @@ button { cursor: pointer; }
 .section-title {
   font-family: "Playfair Display", Georgia, serif;
   font-size: clamp(36px, 5vw, 64px);
-  line-height: 0.98; letter-spacing: -0.04em; margin: 12px 0 0;
+  line-height: 0.96; letter-spacing: -0.045em; margin: 12px 0 0;
 }
 .section-copy { color: var(--muted); font-size: clamp(16px, 2vw, 18px); line-height: 1.75; margin: 0; }
 .btn {
@@ -78,15 +79,15 @@ button { cursor: pointer; }
   white-space: nowrap;
 }
 .btn:hover { transform: translateY(-2px); }
-.btn-primary { background: var(--blue); color: white; box-shadow: 0 16px 34px rgba(37, 99, 235, .22); }
-.btn-primary:hover { background: #1d4ed8; box-shadow: 0 20px 44px rgba(37, 99, 235, .28); }
+.btn-primary { background: var(--slate); color: white; box-shadow: 0 16px 34px rgba(31, 51, 41, .22); }
+.btn-primary:hover { background: #14251d; box-shadow: 0 20px 44px rgba(31, 51, 41, .28); }
 .btn-secondary { background: white; color: var(--slate); border-color: var(--line); box-shadow: var(--shadow-sm); }
 .btn-secondary:hover { border-color: #b8c8dc; box-shadow: var(--shadow-md); }
 .btn-amber { background: var(--amber); color: white; box-shadow: 0 16px 34px rgba(217, 145, 32, .22); }
 .btn-amber:hover { background: var(--amber-dark); }
 
 .top-strip {
-  background: #142235; color: #e8eef6; font-size: 13px; font-weight: 600;
+  background: #20342a; color: #f7ead8; font-size: 13px; font-weight: 700;
 }
 .top-strip .container {
   min-height: 42px; display: flex; align-items: center; justify-content: space-between; gap: 18px;
@@ -95,16 +96,16 @@ button { cursor: pointer; }
 .top-strip span { display: inline-flex; align-items: center; gap: 8px; }
 
 .nav {
-  position: sticky; top: 0; z-index: 1000; background: rgba(255,255,255,.9);
-  border-bottom: 1px solid rgba(220,228,237,.75); backdrop-filter: blur(18px);
+  position: sticky; top: 0; z-index: 1000; background: rgba(251,244,234,.88);
+  border-bottom: 1px solid rgba(229,215,196,.82); backdrop-filter: blur(18px);
 }
 .nav-inner {
   height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px;
 }
 .brand { display: inline-flex; align-items: center; gap: 12px; font-weight: 900; color: var(--slate); }
 .brand-mark {
-  width: 42px; height: 42px; border-radius: 14px; display: grid; place-items: center;
-  color: white; background: linear-gradient(135deg, var(--slate), var(--blue));
+  width: 42px; height: 42px; border-radius: 999px; display: grid; place-items: center;
+  color: #fff7ea; background: linear-gradient(135deg, var(--slate), #44745d);
   box-shadow: var(--shadow-sm);
 }
 .brand small { display: block; color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; margin-top: 2px; }
@@ -136,13 +137,14 @@ button { cursor: pointer; }
   position: relative; min-height: calc(100svh - 118px); display: flex; align-items: center;
   padding: clamp(42px, 6vw, 76px) 0 clamp(42px, 7vw, 88px);
   background:
-    radial-gradient(circle at 12% 12%, rgba(37,99,235,.12), transparent 32%),
-    linear-gradient(135deg, #ffffff 0%, #f4f8fc 58%, #eaf1f9 100%);
+    radial-gradient(circle at 10% 8%, rgba(201,121,44,.18), transparent 30%),
+    radial-gradient(circle at 92% 24%, rgba(31,111,85,.12), transparent 30%),
+    linear-gradient(135deg, #fbf4ea 0%, #fffaf4 52%, #f0dfc8 100%);
   overflow: hidden;
 }
 .hero::after {
   content: ""; position: absolute; inset: auto -12% -34% auto; width: 55vw; aspect-ratio: 1;
-  border-radius: 999px; background: rgba(217,145,32,.09); filter: blur(8px);
+  border-radius: 999px; background: rgba(31,111,85,.08); filter: blur(8px);
 }
 .hero-grid {
   position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(360px, .78fr);
@@ -155,25 +157,26 @@ button { cursor: pointer; }
 }
 .hero h1 {
   font-family: "Playfair Display", Georgia, serif; font-size: clamp(46px, 7vw, 86px);
-  line-height: .95; letter-spacing: -0.055em; margin: 18px 0 18px; max-width: 880px;
+  line-height: .9; letter-spacing: -0.06em; margin: 18px 0 18px; max-width: 900px;
 }
 .hero h1 span { color: var(--blue); }
-.hero-copy { color: #4c5d72; font-size: clamp(17px, 2vw, 20px); line-height: 1.72; margin: 0 0 28px; max-width: 660px; }
+.hero-copy { color: #4f5c53; font-size: clamp(18px, 2vw, 21px); line-height: 1.7; margin: 0 0 28px; max-width: 680px; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 26px; }
 .hero-trust {
   display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; max-width: 680px;
 }
 .trust-pill {
-  background: rgba(255,255,255,.78); border: 1px solid var(--line); border-radius: 18px; padding: 14px;
+  background: rgba(255,250,244,.86); border: 1px solid var(--line); border-radius: 999px; padding: 14px 16px;
   box-shadow: 0 8px 26px rgba(20,38,63,.06);
 }
 .trust-pill strong { display: block; color: var(--slate); font-size: 18px; }
 .trust-pill span { color: var(--muted); font-size: 12px; font-weight: 700; }
 .hero-card {
-  background: rgba(255,255,255,.78); border: 1px solid rgba(255,255,255,.85);
-  border-radius: 34px; padding: 14px; box-shadow: var(--shadow-lg); backdrop-filter: blur(18px);
+  background: rgba(255,250,244,.78); border: 1px solid rgba(255,255,255,.85);
+  border-radius: 42px; padding: 14px; box-shadow: var(--shadow-lg); backdrop-filter: blur(18px);
+  transform: rotate(1.2deg);
 }
-.hero-photo { position: relative; border-radius: 26px; overflow: hidden; aspect-ratio: 4 / 5; background: var(--soft); }
+.hero-photo { position: relative; border-radius: 32px; overflow: hidden; aspect-ratio: 4 / 5; background: var(--soft); }
 .hero-photo img { height: 100%; object-fit: cover; }
 .hero-photo::after {
   content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 48%, rgba(12,24,38,.58));
@@ -190,7 +193,7 @@ button { cursor: pointer; }
 .photo-panel span { font-size: 12px; opacity: .9; }
 
 .logo-row {
-  border-y: 1px solid var(--line); background: white;
+  border-y: 1px solid var(--line); background: #fffaf4;
 }
 .logo-row .container {
   min-height: 92px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px; align-items: center;
@@ -200,10 +203,10 @@ button { cursor: pointer; }
 
 .service-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
 .card {
-  background: white; border: 1px solid var(--line); border-radius: var(--radius);
+  background: #fffaf4; border: 1px solid var(--line); border-radius: var(--radius);
   box-shadow: var(--shadow-sm); transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
 }
-.card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: #c3d1e2; }
+.card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: #d3b88f; }
 .service-card { padding: 26px; display: grid; gap: 16px; }
 .icon {
   width: 48px; height: 48px; border-radius: 16px; display: grid; place-items: center;
@@ -218,6 +221,39 @@ button { cursor: pointer; }
   line-height: 1.2; text-align: left;
 }
 .mini-link:hover { color: #1d4ed8; }
+
+.promise-band {
+  display: grid; grid-template-columns: minmax(0, .95fr) minmax(280px, .55fr); gap: 34px; align-items: end;
+  padding: clamp(34px, 5vw, 58px); border-radius: 38px; background: #20342a; color: #fff7ea;
+  box-shadow: var(--shadow-lg); position: relative; overflow: hidden;
+}
+.promise-band::after {
+  content: ""; position: absolute; width: 340px; height: 340px; border-radius: 999px; right: -120px; top: -120px;
+  background: rgba(201,121,44,.28);
+}
+.promise-band > * { position: relative; z-index: 1; }
+.promise-band h2 {
+  font-family: "Playfair Display", Georgia, serif; font-size: clamp(38px, 6vw, 72px);
+  line-height: .9; letter-spacing: -0.055em; margin: 10px 0 0;
+}
+.promise-band p { color: #eadcc8; line-height: 1.75; margin: 0; font-size: 17px; }
+.promise-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 26px; }
+.promise-stat {
+  padding: 16px; border-radius: 22px; background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.14);
+}
+.promise-stat strong { display: block; font-size: 26px; letter-spacing: -0.04em; }
+.promise-stat span { color: #d9c7af; font-size: 12px; font-weight: 800; }
+
+.steps-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
+.step-card {
+  padding: 22px; border-radius: 28px; border: 1px solid var(--line); background: #fffaf4; box-shadow: var(--shadow-sm);
+}
+.step-number {
+  width: 42px; height: 42px; border-radius: 999px; display: grid; place-items: center;
+  background: var(--slate); color: #fff7ea; font-weight: 900; margin-bottom: 18px;
+}
+.step-card h3 { margin: 0 0 10px; font-size: 18px; letter-spacing: -0.03em; }
+.step-card p { margin: 0; color: var(--muted); line-height: 1.6; font-size: 14px; }
 
 .split {
   display: grid; grid-template-columns: minmax(0, .9fr) minmax(360px, .8fr); gap: clamp(28px, 5vw, 70px); align-items: center;
@@ -279,7 +315,7 @@ button { cursor: pointer; }
 .project-body p { margin: 0; color: var(--muted); line-height: 1.55; }
 
 .testimonial-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; }
-.quote-card { padding: clamp(24px, 4vw, 40px); background: var(--slate); color: white; border-radius: 30px; box-shadow: var(--shadow-lg); }
+.quote-card { padding: clamp(24px, 4vw, 40px); background: var(--slate); color: #fff7ea; border-radius: 34px; box-shadow: var(--shadow-lg); }
 .quote-card p { font-size: clamp(22px, 3vw, 34px); line-height: 1.28; letter-spacing: -0.035em; margin: 18px 0 22px; }
 .quote-card strong { display: block; }
 .quote-card span { color: #b9c5d4; }
@@ -300,7 +336,7 @@ button { cursor: pointer; }
 .contact-wrap {
   display: grid; grid-template-columns: minmax(0, .78fr) minmax(360px, .86fr); gap: 28px; align-items: start;
 }
-.contact-panel { padding: clamp(26px, 4vw, 40px); background: var(--slate); color: white; border-radius: 30px; box-shadow: var(--shadow-lg); }
+.contact-panel { padding: clamp(26px, 4vw, 40px); background: var(--slate); color: #fff7ea; border-radius: 34px; box-shadow: var(--shadow-lg); }
 .contact-panel .section-title { color: white; }
 .contact-panel p { color: #c5d1df; line-height: 1.7; }
 .contact-cards { display: grid; gap: 12px; margin-top: 24px; }
@@ -337,7 +373,7 @@ button { cursor: pointer; }
 .form-success-desc { color: var(--muted); line-height: 1.7; max-width: 540px; margin: 12px auto 0; }
 
 .final-cta {
-  background: linear-gradient(135deg, var(--slate), #1d4ed8); color: white; border-radius: 34px;
+  background: linear-gradient(135deg, var(--slate), #416d58); color: #fff7ea; border-radius: 38px;
   padding: clamp(32px, 6vw, 62px); display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 28px; align-items: center;
   box-shadow: var(--shadow-lg);
 }
@@ -345,7 +381,7 @@ button { cursor: pointer; }
 .final-cta p { color: #d9e4f3; line-height: 1.7; margin: 14px 0 0; max-width: 660px; }
 .final-cta .btn-secondary { color: var(--slate); }
 
-footer { padding: 46px 0; background: #0f1722; color: #c6d2e1; }
+footer { padding: 46px 0; background: #17251e; color: #d9cbb8; }
 .footer-grid { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; }
 footer strong { color: white; }
 footer p { margin: 8px 0 0; color: #8fa0b5; }
@@ -388,6 +424,8 @@ footer p { margin: 8px 0 0; color: #8fa0b5; }
   .section-head { grid-template-columns: 1fr; align-items: start; }
   .service-grid, .pricing-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .portfolio-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .promise-band { grid-template-columns: 1fr; }
+  .steps-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .floating-proof { left: 18px; }
 }
 
@@ -406,6 +444,7 @@ footer p { margin: 8px 0 0; color: #8fa0b5; }
   .photo-panel { left: 12px; right: 12px; bottom: 12px; }
   .logo-row .container { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 18px 0; }
   .service-grid, .pricing-grid, .portfolio-grid { grid-template-columns: 1fr; }
+  .promise-stats, .steps-grid { grid-template-columns: 1fr; }
   .section { padding: 68px 0; }
   .form-row { grid-template-columns: 1fr; }
   .form-nav { flex-direction: column; align-items: stretch; }
@@ -467,26 +506,26 @@ footer p { margin: 8px 0 0; color: #8fa0b5; }
 <section class="hero" id="home">
   <div class="container hero-grid">
     <div class="reveal">
-      <div class="hero-badge"><span class="material-symbols-outlined">verified</span>Trusted by 5,000+ local property owners</div>
-      <h1>Roofing that looks premium and <span>protects for decades.</span></h1>
-      <p class="hero-copy">Titan Roofing helps homeowners and commercial property managers replace, repair, and protect roofs with honest inspections, clean project management, and warranty-backed craftsmanship.</p>
+      <div class="hero-badge"><span class="material-symbols-outlined">verified</span>Guaranteed scope. Clear updates. Premium crews.</div>
+      <h1>Roofing without surprises, <span>from quote to clean up.</span></h1>
+      <p class="hero-copy">Titan Roofing gives homeowners a calmer way to replace or repair a roof: transparent pricing, text-friendly communication, clean crews, and warranty-backed workmanship.</p>
       <div class="hero-actions">
         <button class="btn btn-primary" onclick="scrollToContact()"><span class="material-symbols-outlined">home_repair_service</span>Get My Free Roof Inspection</button>
         <a class="btn btn-secondary" href="tel:18008482766"><span class="material-symbols-outlined">call</span>Emergency Call</a>
       </div>
       <div class="hero-trust" aria-label="Trust indicators">
-        <div class="trust-pill"><strong>50 yr</strong><span>Warranty options</span></div>
-        <div class="trust-pill"><strong>2 hr</strong><span>Emergency response</span></div>
-        <div class="trust-pill"><strong>A+</strong><span>Rated local team</span></div>
+        <div class="trust-pill"><strong>5,000+</strong><span>Roofs completed</span></div>
         <div class="trust-pill"><strong>$0</strong><span>Inspection cost</span></div>
+        <div class="trust-pill"><strong>2 hr</strong><span>Urgent response</span></div>
+        <div class="trust-pill"><strong>A+</strong><span>Trusted crews</span></div>
       </div>
     </div>
     <div class="hero-card reveal">
       <div class="hero-photo">
         <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=82&fit=crop&auto=format" alt="Premium residential roofing project" fetchpriority="high"/>
         <div class="photo-panel">
-          <div><strong>Storm-ready roof system</strong><span>Installed in 3 days</span></div>
-          <div><strong>Clean jobsite promise</strong><span>Protected landscaping</span></div>
+          <div><strong>Price clarity</strong><span>No surprise markups</span></div>
+          <div><strong>Project updates</strong><span>Know what happens next</span></div>
         </div>
       </div>
     </div>
@@ -503,12 +542,29 @@ footer p { margin: 8px 0 0; color: #8fa0b5; }
   </div>
 </section>
 
+<section class="section">
+  <div class="container">
+    <div class="promise-band reveal">
+      <div>
+        <span class="eyebrow" style="color:#f5c178">Hello. We're Titan.</span>
+        <h2>A roofing company built around the idea that homeowners deserve certainty.</h2>
+        <div class="promise-stats">
+          <div class="promise-stat"><strong>01</strong><span>Clear scope</span></div>
+          <div class="promise-stat"><strong>02</strong><span>Clean scheduling</span></div>
+          <div class="promise-stat"><strong>03</strong><span>Covered workmanship</span></div>
+        </div>
+      </div>
+      <p>No vague estimates, no disappearing crews, and no stressful handoffs. We document what your roof needs, explain what it does not, and keep the project moving with a single accountable team.</p>
+    </div>
+  </div>
+</section>
+
 <section class="section" id="services">
   <div class="container">
     <div class="section-head reveal">
       <div>
         <span class="eyebrow">Roofing Services</span>
-        <h2 class="section-title">Everything your roof needs, handled by one accountable team.</h2>
+        <h2 class="section-title">Roofing, exactly how a local service should feel.</h2>
       </div>
       <p class="section-copy">Clear estimates, premium materials, respectful crews, and communication that makes roofing feel simple instead of stressful.</p>
     </div>
@@ -557,8 +613,8 @@ footer p { margin: 8px 0 0; color: #8fa0b5; }
   <div class="container split">
     <div class="reveal">
       <span class="eyebrow">Why Homeowners Trust Us</span>
-      <h2 class="section-title">Premium work without the usual contractor chaos.</h2>
-      <p class="section-copy">A roof is a major investment. Our process is designed around clarity, protection, and a polished experience from the first inspection to final cleanup.</p>
+      <h2 class="section-title">The price, schedule, and next step should never feel mysterious.</h2>
+      <p class="section-copy">A roof is a major investment. Our process is designed around clarity, property protection, and a polished experience from the first inspection to final cleanup.</p>
       <div class="feature-list">
         <div class="feature"><span class="icon"><span class="material-symbols-outlined">photo_camera</span></span><div><h3>Photo-backed inspections</h3><p>You see exactly what we see, with clear repair priorities and no scare tactics.</p></div></div>
         <div class="feature"><span class="icon"><span class="material-symbols-outlined">event_available</span></span><div><h3>Clean scheduling</h3><p>Dedicated project windows, weather communication, and crew updates before work begins.</p></div></div>
@@ -597,7 +653,7 @@ footer p { margin: 8px 0 0; color: #8fa0b5; }
     <div class="section-head reveal">
       <div>
         <span class="eyebrow">Recent Projects</span>
-        <h2 class="section-title">A portfolio that feels local, polished, and real.</h2>
+      <h2 class="section-title">Real roof projects with clean workmanship and curb appeal.</h2>
       </div>
       <p class="section-copy">Residential and commercial projects completed with durable materials, careful staging, and clean curb appeal.</p>
     </div>
@@ -605,6 +661,25 @@ footer p { margin: 8px 0 0; color: #8fa0b5; }
       <article class="card project reveal"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=900&q=82&fit=crop&auto=format" alt="Residential roof replacement" loading="lazy"/><div class="project-body"><span>Residential</span><h3>Lakeside estate replacement</h3><p>Architectural shingles, ventilation upgrade, and full cleanup in three days.</p></div></article>
       <article class="card project reveal"><img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=900&q=82&fit=crop&auto=format" alt="Commercial roofing project" loading="lazy"/><div class="project-body"><span>Commercial</span><h3>Office park roof system</h3><p>Coordinated phased install with minimal interruption to tenants.</p></div></article>
       <article class="card project reveal"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&q=82&fit=crop&auto=format" alt="Industrial roof work" loading="lazy"/><div class="project-body"><span>Industrial</span><h3>Distribution center repairs</h3><p>Leak mitigation, coating plan, and long-term maintenance schedule.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="easy">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <span class="eyebrow">How it works</span>
+        <h2 class="section-title">We make it easy from first quote to final inspection.</h2>
+      </div>
+      <p class="section-copy">A simple five-step process gives homeowners the same confidence as a premium managed service, with the practical speed of a local roofing crew.</p>
+    </div>
+    <div class="steps-grid">
+      <article class="step-card reveal"><div class="step-number">01</div><h3>Get a quote</h3><p>Share your roof needs and we prepare a practical inspection plan.</p></article>
+      <article class="step-card reveal"><div class="step-number">02</div><h3>Confirm scope</h3><p>We review findings, photos, materials, and the exact work included.</p></article>
+      <article class="step-card reveal"><div class="step-number">03</div><h3>Schedule work</h3><p>Permits, material timing, weather windows, and crew logistics are coordinated.</p></article>
+      <article class="step-card reveal"><div class="step-number">04</div><h3>Build the roof</h3><p>Our crew protects your property and completes the roof system cleanly.</p></article>
+      <article class="step-card reveal"><div class="step-number">05</div><h3>Final check</h3><p>We complete cleanup, documentation, and workmanship review before closeout.</p></article>
     </div>
   </div>
 </section>
