@@ -214,9 +214,9 @@ button { cursor: pointer; }
   transform: translateZ(72px);
 }
 .floating-badge small { color: var(--muted); font-size: 11px; font-weight: 800; }
-.floating-badge.one { left: -34px; top: 52px; }
-.floating-badge.two { right: -30px; top: 42%; }
-.floating-badge.three { left: 38px; bottom: -22px; }
+.floating-badge.one { left: 18px; top: 66px; }
+.floating-badge.two { right: 18px; top: 42%; }
+.floating-badge.three { left: 50%; bottom: 18px; transform: translateX(-50%) translateZ(72px); }
 
 .logo-row {
   border-y: 1px solid var(--line); background: #fffaf4;
@@ -257,9 +257,9 @@ button { cursor: pointer; }
 .mini-link:hover { color: #1d4ed8; }
 
 .promise-band {
-  display: grid; grid-template-columns: minmax(0, .95fr) minmax(280px, .55fr); gap: 34px; align-items: end;
+  display: grid; grid-template-columns: minmax(0, .95fr) minmax(280px, .55fr); gap: 34px; align-items: center;
   padding: clamp(34px, 5vw, 58px); border-radius: 38px; background: #20342a; color: #fff7ea;
-  box-shadow: var(--shadow-lg); position: relative; overflow: hidden; transform-style: preserve-3d;
+  box-shadow: var(--shadow-lg); position: relative; overflow: hidden; transform-style: preserve-3d; min-height: auto;
 }
 .promise-band::after {
   content: ""; position: absolute; width: 340px; height: 340px; border-radius: 999px; right: -120px; top: -120px;
@@ -500,7 +500,7 @@ footer p { margin: 8px 0 0; color: #8fa0b5; }
   .floating-badge { font-size: 12px; padding: 9px 10px; transform: none; }
   .floating-badge.one { left: 10px; top: 12px; }
   .floating-badge.two { right: 10px; top: 72px; }
-  .floating-badge.three { left: 10px; bottom: 122px; }
+  .floating-badge.three { left: 10px; bottom: 122px; transform: none; }
   .ba-shell { transform: none; }
   .logo-row .container { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 18px 0; }
   .service-grid, .pricing-grid, .portfolio-grid { grid-template-columns: 1fr; }
