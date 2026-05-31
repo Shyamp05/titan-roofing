@@ -99,7 +99,7 @@ button { cursor: pointer; }
   min-height: 44px; display: flex; align-items: center; justify-content: center; gap: 20px;
 }
 .top-strip strong { color: #fff; }
-.top-strip span { display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-align: center; }
+.top-strip .container > span { display: inline-flex; align-items: center; justify-content: center; gap: 8px; text-align: center; }
 .top-strip .top-secondary { opacity: .92; }
 
 .nav {
@@ -488,12 +488,15 @@ footer p { margin: 8px 0 0; color: #8fa0b5; }
   .steps-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .floating-proof { left: 18px; }
   .step-card:nth-child(even), .step-card:nth-child(even):hover { transform: none; }
+  .hero-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hero-tab { justify-content: flex-start; padding-inline: 12px; }
+  .hero-tab span:last-child { white-space: normal; }
 }
 
 @media (max-width: 720px) {
   .container { width: min(100% - 24px, var(--container)); }
   .top-strip .container { min-height: auto; padding: 10px 0; flex-direction: column; gap: 6px; }
-  .top-strip span { width: 100%; line-height: 1.35; }
+  .top-strip .container > span { width: 100%; line-height: 1.35; }
   .top-strip .top-secondary { font-size: 12px; max-width: 290px; margin: 0 auto; }
   .nav-inner { height: 70px; }
   .brand small { display: none; }
@@ -878,9 +881,10 @@ footer p { margin: 8px 0 0; color: #8fa0b5; }
     <div class="chat-msg bot"><div class="chat-bubble">Hi. Need a roof inspection, repair, or emergency callback?</div><div class="chat-time">Now</div></div>
   </div>
   <div class="chat-quick" id="chatQuick">
-    <button type="button" onclick="sendQuickChat('I need a free inspection')">Free inspection</button>
-    <button type="button" onclick="sendQuickChat('I have an emergency roof leak')">Emergency leak</button>
-    <button type="button" onclick="sendQuickChat('I need help with insurance')">Insurance claim</button>
+    <button type="button" onclick="startChatLead('inspection')">Get quote in chat</button>
+    <button type="button" onclick="startChatLead('inspection')">Free inspection</button>
+    <button type="button" onclick="startChatLead('emergency')">Emergency leak</button>
+    <button type="button" onclick="startChatLead('insurance')">Insurance claim</button>
   </div>
   <div class="chat-input-row">
     <input class="chat-input" id="chatInput" type="text" maxlength="240" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendChatMsg()"/>
@@ -1073,6 +1077,7 @@ const chatQuick = document.getElementById('chatQuick');
 const chatStatus = document.getElementById('chatStatus');
 let chatOpen = false;
 let chatBusy = false;
+let chatLead = null;
 const chatReplies = {
   quote: "Absolutely. I can help you start with a free inspection. Tap the contact form and choose the service that best matches your roof.",
   emergency: "If water is actively entering the property, call 1-800-TITAN-ROOF now. I can also take you to the form and pre-select Emergency Service.",
@@ -1081,12 +1086,41 @@ const chatReplies = {
   pricing: "Every roof is different, so Titan gives a clear inspection-backed estimate before work begins. No vague scope, no surprise handoff.",
   fallback: "Thanks. The best next step is a free roof inspection so a Titan specialist can review your roof and follow up with a clear plan."
 };
+const chatLeadSteps = [
+  { key: 'firstName', prompt: 'Great. What is your first name?', validate: (value) => value.length > 1, error: 'Please enter your first name.' },
+  { key: 'lastName', prompt: 'Thanks. What is your last name?', validate: (value) => value.length > 1, error: 'Please enter your last name.' },
+  { key: 'phone', prompt: 'What phone number should our roofing specialist call?', validate: (value) => value.replace(/\D/g, '').length >= 7, error: 'Please enter a valid phone number.' },
+  { key: 'email', prompt: 'What email should we use for the estimate details?', validate: (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value), error: 'Please enter a valid email address.' },
+  { key: 'address', prompt: 'What is the property address?', validate: (value) => value.length > 5, error: 'Please enter the property address.' },
+  { key: 'propertyType', prompt: 'Is this residential, commercial, industrial, or multi-family?', validate: (value) => normalizePropertyType(value) !== '', error: 'Please reply with residential, commercial, industrial, or multi-family.' },
+  { key: 'message', prompt: 'Last thing: briefly describe the roof issue or project goal.', validate: (value) => value.length > 2, error: 'Please add a short project note.' }
+];
 function toggleChat() {
   chatOpen = !chatOpen;
   chatPanel.classList.toggle('open', chatOpen);
   chatIcon.textContent = chatOpen ? 'close' : 'chat';
   chatButton.setAttribute('aria-expanded', String(chatOpen));
   if (chatOpen) chatInput.focus();
+}
+function startChatLead(service = 'inspection') {
+  if (!chatOpen) toggleChat();
+  chatLead = {
+    step: 0,
+    data: {
+      service: service === 'insurance' ? 'inspection' : service,
+      insurance: service === 'insurance',
+      roofSize: '',
+      contactTime: '',
+      pageUrl: window.location.href,
+      referrer: document.referrer || '',
+      utm: Object.fromEntries(new URLSearchParams(window.location.search).entries())
+    }
+  };
+  chatQuick.style.display = 'none';
+  addMsg(service === 'emergency'
+    ? 'I can capture this as an emergency roofing request. If water is actively entering, also call 1-800-TITAN-ROOF now.'
+    : 'Perfect. I can capture your request right here and send it to Titan Roofing.', 'bot');
+  window.setTimeout(() => addMsg(chatLeadSteps[0].prompt, 'bot'), 250);
 }
 function formatChatTime() {
   const now = new Date();
@@ -1103,6 +1137,62 @@ function setChatBusy(isBusy) {
   chatBusy = isBusy;
   chatSend.disabled = isBusy;
   chatStatus.textContent = isBusy ? 'Typing' : 'Online';
+}
+function normalizePropertyType(value) {
+  const key = value.toLowerCase().trim();
+  if (key.includes('home') || key.includes('res')) return 'residential';
+  if (key.includes('comm') || key.includes('office') || key.includes('business')) return 'commercial';
+  if (key.includes('ind') || key.includes('warehouse')) return 'industrial';
+  if (key.includes('multi') || key.includes('apartment') || key.includes('family')) return 'multifamily';
+  return '';
+}
+function syncChatLeadToForm(data) {
+  document.getElementById('firstName').value = data.firstName || '';
+  document.getElementById('lastName').value = data.lastName || '';
+  document.getElementById('phone').value = data.phone || '';
+  document.getElementById('email').value = data.email || '';
+  document.getElementById('address').value = data.address || '';
+  document.getElementById('propType').value = data.propertyType || '';
+  document.getElementById('service').value = data.service || 'inspection';
+  document.getElementById('message').value = data.message || '';
+  document.getElementById('insurance').checked = Boolean(data.insurance);
+}
+async function submitChatLead() {
+  const data = chatLead.data;
+  syncChatLeadToForm(data);
+  setChatBusy(true);
+  try {
+    const response = await fetch('/api/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(result.error || 'Could not submit the lead.');
+    addMsg('Done. Your request has been sent to Titan Roofing. A specialist will follow up shortly.', 'bot');
+    chatLead = null;
+  } catch (error) {
+    addMsg('I could not submit that automatically. I filled the main form with your details, so please tap Submit Request there.', 'bot');
+    scrollToContact();
+  } finally {
+    setChatBusy(false);
+  }
+}
+function handleChatLeadAnswer(text) {
+  const current = chatLeadSteps[chatLead.step];
+  const value = text.trim();
+  if (!current.validate(value)) {
+    addMsg(current.error, 'bot');
+    return;
+  }
+  chatLead.data[current.key] = current.key === 'propertyType' ? normalizePropertyType(value) : value;
+  chatLead.step += 1;
+  if (chatLead.step < chatLeadSteps.length) {
+    addMsg(chatLeadSteps[chatLead.step].prompt, 'bot');
+    return;
+  }
+  addMsg('Thanks. I have everything needed to create the lead.', 'bot');
+  submitChatLead();
 }
 function getBotReply(text) {
   const key = text.toLowerCase();
@@ -1126,6 +1216,15 @@ function sendChatText(text) {
   addMsg(text, 'user');
   chatInput.value = '';
   chatQuick.style.display = 'none';
+  if (chatLead) {
+    handleChatLeadAnswer(text);
+    return;
+  }
+  if (/quote|estimate|inspection|repair|replace|emergency|leak|insurance|claim/i.test(text)) {
+    const service = /emergency|leak|urgent|water/i.test(text) ? 'emergency' : /insurance|claim/i.test(text) ? 'insurance' : 'inspection';
+    startChatLead(service);
+    return;
+  }
   setChatBusy(true);
   window.setTimeout(() => {
     addMsg(getBotReply(text), 'bot');
