@@ -349,13 +349,6 @@ button { cursor: pointer; }
   color: white; display: grid; place-items: center; box-shadow: var(--shadow-lg);
 }
 .ba-handle::before { content: "drag"; position: absolute; bottom: -26px; color: white; background: rgba(20,34,53,.72); font-size: 10px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; padding: 4px 8px; border-radius: 999px; }
-.ba-label {
-  position: absolute; z-index: 6; top: 16px; padding: 8px 11px; border-radius: 999px;
-  background: rgba(255,255,255,.9); color: var(--slate); font-size: 11px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase;
-}
-.ba-label.before { left: 16px; }
-.ba-label.after { right: 16px; }
-
 .portfolio-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
 .project { overflow: hidden; }
 .project img { aspect-ratio: 4/3; object-fit: cover; transition: transform .28s ease; }
@@ -725,10 +718,8 @@ footer p { margin: 8px 0 0; color: #8fa0b5; }
         <p class="section-copy">Drag the handle to compare aging shingles with a clean architectural replacement. The slider is built for smooth mouse and touch interaction on every screen size.</p>
       </div>
       <div class="before-after" id="beforeAfter" role="slider" aria-label="Before and after roofing comparison" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0">
-        <img class="ba-after" src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1200&q=82&fit=crop&auto=format" alt="After roof replacement"/>
-        <img class="ba-before" src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=1200&q=82&fit=crop&auto=format" alt="Before roof replacement"/>
-        <span class="ba-label before">Before</span>
-        <span class="ba-label after">After</span>
+        <img class="ba-after" src="assets/after-roof.png" alt="After roof replacement with new shingles" width="1536" height="1024" loading="lazy" decoding="async"/>
+        <img class="ba-before" src="assets/before-roof.png" alt="Before roof replacement with damaged shingles" width="1536" height="1024" loading="lazy" decoding="async"/>
         <span class="ba-line" aria-hidden="true"></span>
         <span class="ba-handle" aria-hidden="true"><span class="material-symbols-outlined">drag_indicator</span></span>
       </div>
